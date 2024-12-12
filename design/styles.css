@@ -1,0 +1,305 @@
+
+
+/*REGISTER PAGE*/
+
+#header {
+position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top:10vh;
+  height: auto;
+  left: center;
+  
+
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 44px;
+  color: #000000;
+}
+form {
+    display: flex;
+    padding-top: 7%;
+    flex-direction: column;
+    align-items: center;
+    object-fit: cover;
+}
+.form-register .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+   
+  .twotone{
+    /*****polygon****/
+transition: all .4s ease-in-out;
+            width: 100%;
+            height: 100%;
+            background-color: #87827d;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 0;
+            /*You can generate clip- path : https://www.cssportal.com/css-clip-path-generator/*/
+              clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%); 
+}
+#usernameInput  {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    left: center;
+    top: 30vh;
+    width: 280px;
+    height: 32px;
+    background: #FFFFFF;
+  
+    /***/
+    border-radius: 10px;
+    overflow-x: hidden;
+    border: 3px solid #474645;
+    align-items: center;
+    background: #FFFFFF;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+    transition: all .6s ease-in-out;
+     /***/
+  }
+  #firstnameInput {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    left: center;
+    top: 35vh;
+    width: 280px;
+    height: 32px;
+    background: #FFFFFF;
+    /***/
+    border-radius: 10px;
+    overflow-x: hidden;
+    border: 3px solid #474645;
+    align-items: center;
+    background: #FFFFFF;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+    transition: all .6s ease-in-out;
+     /***/
+  }
+  #lastnameInput {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    left: center;
+    top: 40vh;
+    width: 280px;
+    height: 32px;
+    background: #FFFFFF;
+    /***/
+    border-radius: 10px;
+    overflow-x: hidden;
+    border: 3px solid #474645;
+    align-items: center;
+    background: #FFFFFF;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+    transition: all .6s ease-in-out;
+     /***/
+  }
+  #emailInput {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    left: center;
+    top: 45vh;
+    width: 280px;
+    height: 32px;
+    background: #FFFFFF;
+    /***/
+    border-radius: 10px;
+    overflow-x: hidden;
+    border: 3px solid #474645;
+    align-items: center;
+    background: #FFFFFF;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+    transition: all .6s ease-in-out;
+     /***/
+  }
+  #passwordInput {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    left: center;
+    top: 50vh;
+    width: 280px;
+    height: 32px;
+    background: #FFFFFF;
+    /***/
+    border-radius: 10px;
+    overflow-x: hidden;
+    border: 3px solid #474645;
+    align-items: center;
+    background: #FFFFFF;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+    transition: all .6s ease-in-out;
+     /***/
+  }
+  #confirmPassword {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    left: center;
+    top: 55vh;
+    width: 280px;
+    height: 32px;
+    background: #FFFFFF;
+    /***/
+    border-radius: 10px;
+    overflow-x: hidden;
+    border: 3px solid #474645;
+    align-items: center;
+    background: #FFFFFF;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+    transition: all .6s ease-in-out;
+     /***/
+   }
+ #createUserButton {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    left: center;
+    top: 65vh;
+    width: 200px;
+    height: 52px;
+  
+    border-radius: 10px;
+    overflow-x: hidden;
+    border: 3px solid #474645;
+    align-items: center;
+    background: #bb810c;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+    transition: all .6s ease-in-out;
+  }
+  
+  /*Login PAGE*/
+
+
+  
+  #signin {
+    position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top:25vh;
+  height: auto;
+  left: center;
+  
+
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 44px;
+  color: #000000;
+  }
+
+#username {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 310px;
+    height: 34px;
+    left: center;
+    top: 35vh; 
+   
+    /***/
+    border-radius: 10px;
+    overflow-x: hidden;
+    border: 3px solid #474645;
+    align-items: center;
+     /***/
+    background: #FFFFFF;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+    transition: all .6s ease-in-out;
+    
+  }
+  
+  #password {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 310px;
+    height: 32px;
+    left: center;
+    top: 40vh; 
+    background: #FFFFFF;
+     /***/
+    border-radius: 10px;
+    overflow-x: hidden;
+    border: 3px solid #474645;
+    align-items: center;
+    background: #FFFFFF;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+    transition: all .6s ease-in-out;
+     /***/
+  }
+  #noaccount {
+    position: fixed;
+    display: center;
+    text-align: center;
+   
+    width: 300px;
+    top: 50vh;
+    left: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 27px;
+   
+   } 
+   #loginOptions {
+
+    position: absolute;
+    width: 134px;
+    height: 26px;
+    left: center;
+    top: 60vh;
+  
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 27px;
+    color: #000000;
+    
+  }
+  #loginbutton {
+    position: absolute;
+    width: 218px;
+    height: 57px;
+    left: center;
+    top: 52vh;
+    
+    
+    font-family: fantasy;
+    font-style:normal;
+    font-size: 20px;
+    line-height: 27px;
+    color: #FFFFFF;
+    background: #aa6e0f;
+    border-radius: 10px;
+    overflow-x: hidden;
+    margin-top: 20px;
+  }
