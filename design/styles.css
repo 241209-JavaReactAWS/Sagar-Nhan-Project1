@@ -1,5 +1,10 @@
 
-
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #9d9d9e;
+}
 /*REGISTER PAGE*/
 
 #header {
@@ -303,3 +308,79 @@ transition: all .4s ease-in-out;
     overflow-x: hidden;
     margin-top: 20px;
   }
+
+  /* HOME PAGE */
+
+#top-bar{
+    position:relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   padding-top:2%;
+}
+#search-bar {
+    width: 30%;
+    height: 40px;
+    border: 2px;
+    border-radius: 10px;
+    padding: 0 40px 0 15px ;
+    outline: none;
+    background-color: #FFFFFF;
+}
+#search-icon {
+   position: absolute;
+   transform: translateY(-50%);
+    background: none;
+    background-color: none;
+    border: none;
+    cursor: pointer;
+    color:#6b6565;
+    font-size: 20px;
+}
+#search-icon:hover {
+    background-color: none;
+    color:#282424;
+    transform: scale(1.1);
+}
+
+.nav {
+    position: fixed ;
+    z-index: 10;
+    top: 50%;
+    right: 2%;
+    transform: translateY(-50%);
+
+}
+
+.button {
+    cursor: pointer;
+    width: 55px;
+    height: 55px;
+    background-color: #797975;
+    border-radius: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: .7rem 0;
+    box-shadow: rgb(56, 49, 49);
+    
+        
+}
+i {
+    font-size: 1.5rem;
+        color: rgb(69, 65, 61);
+        pointer-events: none;
+        background-color: #797975;
+    }
+
+/* adjust BUtton when hover */
+.button:hover {
+    background-color: #bb810c;
+    color:#794b1e;
+    transform: scale(1.1);
+}
+.button:hover i{
+    background-color: #bb810c;
+    color:#794b1e;
+    transform: scale(1.1);
+    }
