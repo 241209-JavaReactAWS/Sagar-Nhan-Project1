@@ -5,7 +5,7 @@
     box-sizing: border-box;
     background-color: #9d9d9e;
 }
-/*REGISTER PAGE*/
+/*******************************REGISTER PAGE*************************/
 
 #header {
 position: fixed;
@@ -195,7 +195,7 @@ transition: all .4s ease-in-out;
     transition: all .6s ease-in-out;
   }
   
-  /*Login PAGE*/
+  /****************************Login PAGE*********************/
 
 
   
@@ -309,47 +309,57 @@ transition: all .4s ease-in-out;
     margin-top: 20px;
   }
 
-  /* HOME PAGE */
-
+  /***************** HOME PAGE *************************/
+/* SEARCH BAR*/
+.page {
+   
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+}
 #top-bar{
-    position:relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-   padding-top:2%;
+ 
+  background-color: #FFFFFF;
+   margin-top: 5%;
+   width: 90%;
+   height: 40px;
+   border: 2px;
+   border-radius: 40px;
+   padding: 0px 25px ;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+    text-align: center;
+ 
 }
-#search-bar {
-    width: 30%;
-    height: 40px;
-    border: 2px;
-    border-radius: 10px;
-    padding: 0 40px 0 15px ;
-    outline: none;
-    background-color: #FFFFFF;
+input {
+ 
+  width: 100%;
+   height: 100%;
+   border: 2px;
+   border-radius: 40px;
+   padding: 0px 25px ;
+   border: none;
+   background: none;
+   outline: none;
 }
-#search-icon {
-   position: absolute;
-   transform: translateY(-50%);
-    background: none;
-    background-color: none;
-    border: none;
-    cursor: pointer;
-    color:#6b6565;
-    font-size: 20px;
+i {
+  font-size: 1.5rem;
+  background: none;
 }
-#search-icon:hover {
-    background-color: none;
-    color:#282424;
-    transform: scale(1.1);
+.fa-solid:hover {
+  color:#bb810c;
+  cursor: pointer;
+  
 }
 
+/******************BUTTON **********************/
 .nav {
-    position: fixed ;
+    position: relative;
     z-index: 10;
-    top: 50%;
+    margin-top: 5%;
     right: 2%;
     transform: translateY(-50%);
-
+  
 }
 
 .button {
@@ -359,18 +369,20 @@ transition: all .4s ease-in-out;
     background-color: #797975;
     border-radius: 30%;
     display: flex;
+    float: left;
     justify-content: center;
     align-items: center;
-    margin: .7rem 0;
+    margin: 2rem .7rem 0;
     box-shadow: rgb(56, 49, 49);
     
         
 }
-i {
+
+#icon {
     font-size: 1.5rem;
         color: rgb(69, 65, 61);
         pointer-events: none;
-        background-color: #797975;
+        background: none;
     }
 
 /* adjust BUtton when hover */
@@ -384,3 +396,36 @@ i {
     color:#794b1e;
     transform: scale(1.1);
     }
+
+  /*********** MAIN _TITLE**********/
+  .main-title {
+    text-align: center;
+  }
+  h2 {
+    position: relative;
+    text-transform: uppercase;
+    font-size: 5rem;
+    font-weight: 700;
+    z-index: 0;
+    
+
+  }
+  span {
+    color: rgb(63, 62, 61);
+    z-index: -1;
+    background: none;
+    font-size: 3rem;
+    left: 25%;
+  }
+  .bg-text {
+    position: absolute;
+    top: 10%;
+    left: 25%;
+    transform: translate(-20%, -60%);
+    color:#bb810c;
+    z-index: 1;
+    font-weight: 700;
+    font-size: 2.5rem;
+    background: none;
+    
+  }
