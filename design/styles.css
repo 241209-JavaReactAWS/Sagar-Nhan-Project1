@@ -429,3 +429,56 @@ i {
     background: none;
     
   }
+
+  /****************************************************************/
+  @media screen and (max-width: 1000px){ 
+    #nav-bar {
+        position: fixed;
+        z-index: 10;
+        top: 50%;
+        right: 3%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: translateY(-50%);
+
+    }
+    
+    .button {
+      
+        cursor: pointer;
+        width: 55px;
+        height: 55px;
+        background-color: #797975;
+        border-radius: 30%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 1rem .7rem 0;
+        box-shadow: rgb(56, 49, 49);
+     
+            
+    }
+    
+    #icon {
+        font-size: 1.5rem;
+            color: rgb(69, 65, 61);
+            pointer-events: none;
+            background: none;
+        }
+    
+    /* adjust BUtton when hover */
+    .button:hover {
+        background-color: #bb810c;
+        color:#794b1e;
+        transform: scale(1.1);
+    }
+    .button:hover i{
+        background-color: #bb810c;
+        color:#794b1e;
+        transform: scale(1.1);
+        }
+    
+}
+  @import './media';
