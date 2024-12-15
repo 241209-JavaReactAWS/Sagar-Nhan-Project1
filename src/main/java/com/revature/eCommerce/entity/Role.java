@@ -1,46 +1,42 @@
 package com.revature.eCommerce.entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+
+@Entity
+@Table(name ="account_role")
 public class Role {
+
     @Id
+    @Column(name="role_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Integer role_id;
 
-    private String name;
+    @Column(name = "Role_name", nullable = false)
+    private String roleName;
 
-    private String description;
 
-    public long getId() {
-        return id;
+    public Integer getRoleId() {
+        return role_id;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setRoleId(Integer role_id) {
+        this.role_id = role_id;
     }
 
-    public String getName() {
-        return name;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String roleName) {
+        this.roleName = roleName;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
     public String toString() {
         return "Role {" +
-                "id=" + id + ", " +
-                "name=" + name + ", " +
-                "description=" + description +
+                "role_id=" + role_id + ", " +
+                "name=" + roleName + ", " +
+
                 "}";
     }
 }

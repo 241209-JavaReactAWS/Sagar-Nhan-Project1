@@ -5,55 +5,44 @@ import jakarta.persistence.Table;
 import org.jetbrains.annotations.*;
 
 @Entity
-@Table(name ="account")
+@Table(name ="Account")
 
 public class Account {
 
-    @Column(name="accountId")
+    @Column(name="User_id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long accountId;
+    private Integer userId;
 
+    @Column(name="Username")
     private String username;
 
-    private String password;
+    @Column(name= "password_hash")
+    private String passwordHash;
 
-    private String firstName;
+    @Column(name="role_name")
+    private String roleName;
 
-    private String lastName;
 
-    @NotNull
-
-    private String email;
-
-    private String address;
-
-    private String phone;
-
-    private long purchaseAmount;
-
-    private Cart cart;
-
-    private Role role;
-
-    /* CONSTRUCTOR without accountID*/
-    public Account(String username, String password){
+    public Account(String username, String passwordHash) {
         this.username = username;
-        this.password = password;
+        this.passwordHash = passwordHash;
     }
 
-    /* CONSTRUCTOR */
-    public Account(long accountId, String firstName, String lastName, String email, String address, String phone) {
-        this.accountId = accountId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.address = address;
-        this.phone = phone;
+    public Account(Integer userId, String username, String passwordHash, String roleName) {
+        this.userId = userId;
+        this.username = username;
+        this.passwordHash = passwordHash;
+        this.roleName = roleName;
     }
 
+    public Integer getUserId() {
+        return userId;
+    }
 
-
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public String getUsername() {
         return username;
@@ -63,86 +52,28 @@ public class Account {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
-    public long getAccountId() {
-        return accountId;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setAccountId(long accountId) {
-        this.accountId = accountId;
-    }
-
-    public long getPurchaseAmount() {
-        return purchaseAmount;
-    }
-
-    public void setPurchaseAmount(long purchaseAmount) {
-        this.purchaseAmount = purchaseAmount;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(java.lang.String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(java.lang.String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public @NotNull String getEmail() {
-        return email;
-    }
-
-    public void setEmail(@NotNull String email) {
-        this.email = email;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     public String toString() {
         return "Account {"+
-                "accountId  = " + accountId +
-                ", email    = " + email + '\'' +
-                ", firstName= " + firstName + '\'' +
-                ", lastName = " + lastName + '\'' +
-                ", address  = " + address + '\'' +
-                ", phone    = " + phone + '\'' +
+                "userId  = " + userId +
+                ", username    = " + username + '\'' +
+                ", password = " + passwordHash + '\'' +
+                ", roleName = " + roleName + '\'' +
                 "} ";
     }
 }

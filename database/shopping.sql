@@ -19,6 +19,7 @@ CREATE TABLE Account (
     User_id INT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
     First_name VARCHAR(20) NOT NULL,
     Last_name VARCHAR(20) NOT NULL,
+    Address VARCHAR(255) NOT NULL,
     Email VARCHAR(40) UNIQUE NOT NULL,
     Phone VARCHAR(12),
     CONSTRAINT PK_Account_users PRIMARY KEY (User_id)
