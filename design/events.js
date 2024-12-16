@@ -1,207 +1,148 @@
 let usernameInput = document.getElementById("usernameInput")
 let passwordInput = document.getElementById("passwordInput")
-let registerButton = document.getElementById ("createUserButton")
+let registerButton = document.getElementById("createUserButton")
 let navbutton = document.querySelectorAll(".nav-bar")
 let sellectButton = document.querySelectorAll(".button")
+let dropdowntable = document.querySelector("#account .dropdown");
 
-
-
-//slide
-
-let products =[
+// Sample products for display (New Arrivals)
+let products = [
     {
-        name: "Koeniggsegg",
-        price: 1000.00,
-        quantity: 9,
-        image: "https://via.placeholder.com/150",
-    },
-    {
-        name: "Ram",
-        price: 900.00,
-        quantity: 8,
-        image: "https://via.placeholder.com/150",
-    },
-    {
-        name: "Honda",
-        price: 700.00,
-        quantity: 7,
-        image: "https://via.placeholder.com/150",
-    },
-    {
-        name: "Kia",
-        price: 560.00,
-        quantity: 6,
-        image: "https://via.placeholder.com/150",
-    },
-    {
-        name: "Ford",
-        price: 477.00,
+        id: 1,
+        name: "1971 Pontiac GTO Judge",
+        price: 10.99,
         quantity: 5,
-        image: "https://via.placeholder.com/150",
+        rating: 4.9,
+        imageUrl: "../assets/car1"
     },
     {
-        name: "Toyota",
-        price: 350.00,
-        quantity: 4,
-        image: "https://via.placeholder.com/150",
+        id: 2,
+        name: "The Monkeemobile",
+        price: 510.99,
+        quantity: 5,
+        rating: 4.3,
+        imageUrl: "../assets/car2"
     },
     {
-        name: "Acura",
-        price: 880.00,
-        quantity: 3,
-        image: "https://via.placeholder.com/150",
-    }
+        id: 3,
+        name: "Car",
+        price: 101.99,
+        quantity: 5,
+        rating: 4.2,
+        imageUrl: "../assets/car3"
+    },
+    {
+        id: 4,
+        name: "1971 Pontiac GTO Judge",
+        price: 120.99,
+        quantity: 5,
+        rating: 4.0,
+        imageUrl: "../assets/car4"
+    },
+    // Add more predefined products as needed...
 ];
-console.log("Products:", products);
-function renderProducts() {
-    const productContainer = document.querySelector('.product-container');
-    productContainer.innerHTML = "";
 
-    products.forEach(product => {
-        const productCard = document.createElement('div');
-        productCard.classList.add('product-card');
-        productCard.innerHTML = `
-            <img src="${product.image}" alt="${product.name}" class="product-image">
-            <h4 class="product-name">${product.name}</h4>
-            <p class="product-price">$${product.price.toFixed(2)}</p>
-            <p class="product-quantity">Available: ${product.quantity}</p>
-            <button class="add-to-cart">Add to Cart</button>
+// Function to create a product card
+function createProductCard(product) {
+    return `
+        <div class="card" style="width: 18rem; flex: 0 0 auto;">
+            <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}">
+            <div class="card-body">
+                <h5 class="card-title">${product.name}</h5>
+                <p class="card-text">By: ${product.quantity}</p>
+                <p class="card-text text-primary fw-bold">$${product.price.toFixed(2)}</p>
+                <p class="card-text text-warning">Rating: ⭐${product.rating}</p>
+                <a href="#" class="btn btn-primary">Add to Cart</a>
+            </div>
+        </div>
+    `;
+}
+
+//Slide the images on the Home page 
+function updateProductDetails(index) {
+    const productTitle = document.querySelector(".card-body h1.card-title");
+    const productDescription = document.querySelector(".card-body p.card-text");
+
+    // Set product details from the `products` array
+    const product = products[index];
+    if (product) {
+        productTitle.textContent = product.name;
+        productDescription.innerHTML = `
+            Price: <span class="text-primary fw-bold">$${product.price.toFixed(2)}</span><br>
+            Rating: <span class="text-warning">⭐${product.rating}</span><br>
+            Quantity: <span>${product.quantity}</span>
         `;
-        productContainer.appendChild(productCard);
-    });
-}
-document.addEventListener("DOMContentLoaded", renderProducts);
-
-// Create a function that we expect to be called when the button is clicked
-function submitNewUser(){
-
-    // Grab the current value from the usernameInput and passwordInput
-    let usernameValue = usernameInput.value;
-    let passwordValue = passwordInput.value;
-
-    //* Create an object to hold the info for this user
-
-    let user = {
-        username: usernameValue,
-        password: passwordValue
-
     }
-    //  this sends an HTTP request 
-    console.log(user)
-
 }
 
-function removeActive(){
-    sellectButton.forEach(sellectButton => sellectButton.classList.remove('active'));
+
+
+
+// Initialize with the first product details
+document.addEventListener("DOMContentLoaded", () => {
+    updateProductDetails(0); // Start with the first product
+});
+
+
+// Function to render the current list of products in the "New Arrivals" section
+function renderProducts() {
+    let productsContainer = document.getElementById('products');
+    productsContainer.innerHTML = products.map(createProductCard).join('');
 }
+
+// Event listener for the "Add to Inventory" form submission
+document.getElementById('product-form').addEventListener('submit', function(e) {
+    e.preventDefault();  // Prevent page reload on form submit
+
+    // Get the input values for the new product
+    const productName = document.getElementById('product-name').value;
+    const productPrice = document.getElementById('product-price').value;
+    const productQuantity = document.getElementById('product-quantity').value;
+    const productImage = document.getElementById('product-image').files[0];
+
+    // Validate input values
+    if (productName && productPrice && productQuantity && productImage) {
+        // Create a new product object and add it to the products array
+        const newProduct = {
+            id: products.length + 1, // Incremental ID based on length
+            title: productName,
+            author: "Unknown", // You can add more fields like author if required
+            genre: "Unknown", // You can add more fields like genre if required
+            price: parseFloat(productPrice),
+            rating: 0, // Default rating
+            imageUrl: URL.createObjectURL(productImage) // Object URL for the uploaded image
+        };
+
+        products.push(newProduct);  // Add the new product to the products array
+        renderProducts();  // Re-render the product list
+
+        // Reset the form after submission
+        document.getElementById('product-form').reset();
+    } else {
+        alert('Please fill out all fields.');
+    }
+});
+
+// Initialize by rendering the existing products
+document.addEventListener('DOMContentLoaded', renderProducts);
+
+// Navigation handling for the nav buttons
 sellectButton.forEach(button => {
     button.addEventListener('click', () => {
-        removeActive();
+        sellectButton.forEach(sellectButton => sellectButton.classList.remove('active'));
         button.classList.add('active');
 
         let buttonId = button.id;
-         switch (buttonId) {
+        switch (buttonId) {
             case 'home':
                 window.location.href = 'home.html'; // Navigate to home page
                 break;
             case 'contact':
                 window.location.href = 'contact.html'; // Navigate to contact page
                 break;
-            // case 'account':
-                // window.location.href = 'login.html'; // Navigate to account page
-                // break;
             case 'cart':
                 window.location.href = 'cart.html'; // Navigate to cart page
-         }
-    })
-})
-
-
-
-// DROPDOWN LOGIN
-
-let dropdowntable = document.querySelector("#account .dropdown");
-
-document.getElementById("account").addEventListener('click', function (event) {
-    event.stopPropagation(); // Prevent click propagation
-    dropdowntable.style.display = dropdowntable.style.display === 'block' ? 'none' : 'block';
+                break;
+        }
+    });
 });
-
-// Prevent dropdown from closing when clicking inside it
-dropdowntable.addEventListener('click', function (event) {
-    event.stopPropagation();
-});
-
-// Close dropdown when clicking outside
-document.addEventListener("click", function (e) {
-    if (!e.target.closest("#account")) {
-        dropdowntable.style.display = 'none';
-    }
-});
-
-
-registerButton.addEventListener('click', submitNewUser)
-
-
-
-///********** SLIDE LOGIC ***************/
-
-const imgPosition = document.querySelectorAll(".aspect-ratio img")
-const imgContainer = document.querySelector('.aspect-ratio')
-let imgNumber = imgPosition.length
-let index = 0
-imgPosition.forEach(function(image,index){
-    image.style.left= index*100 + "%"
-})
-function imgSlide(){
-    index++;
-    console.log(index)
-    if(index>= imgNumber) {index =0}
-    imgContainer.style.left ="-" + index*100+ "%"
-    
-}
-setInterval(imgSlide, 5000)
-
-
-
-// function createProductCard(product) {
-    // let productCard = document.createElement("div");
-    // productCard.classList.add('product-card');
-
-    // let productImage = document.createElement ('img');
-    // productImage.classList.add('product-image');
-
-    // let productName = document.createElement ('h4');
-    // productName.textContent = product.name;
-
-    // let productPrice = document.createElement ('p');
-    // productPrice.classList.add('product-price');
-    // productPrice.textContent = `$${product.price}`;
-
-    // let productQuantity = document.createElement('p');
-    // productQuantity.textContent = `Quantity: ${product.quantity}`;
-
-    // let addToCartButton = document.createElement('button');
-    // addToCartButton.classList.add('add-to-cart');
-    // addToCartButton.textContent = 'Add to Cart';
-
-    // productCard.appendChild(productImage);
-    // productCard.appendChild(productName);
-    // productCard.appendChild(productPrice);
-    // productCard.appendChild(productQuantity);
-    // productCard.appendChild(addToCartButton);
-    // 
-    // return productCard;
-// }
-
-// MAKE IT SHOW IN THE PRODUCT CONTAINER 
-
-// function listProduct() {
-    // let productContainer = document.getElementById('product-container');
-    // productContainer.innerHTML = '';
-// 
-    // products.forEach(product =>{
-        // let productCard = createProductCard(product);
-        // productContainer.appendChild(productCard);
-    //  }) 
-// }
