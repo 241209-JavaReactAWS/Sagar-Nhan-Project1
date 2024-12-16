@@ -12,7 +12,7 @@ let products = [
         name: "1971 Pontiac GTO Judge",
         price: 10.99,
         quantity: 5,
-        rating: 4.8,
+        rating: 4.9,
         imageUrl: "../assets/car1"
     },
     {
@@ -20,7 +20,7 @@ let products = [
         name: "The Monkeemobile",
         price: 510.99,
         quantity: 5,
-        rating: 4.8,
+        rating: 4.3,
         imageUrl: "../assets/car2"
     },
     {
@@ -28,7 +28,7 @@ let products = [
         name: "Car",
         price: 101.99,
         quantity: 5,
-        rating: 4.8,
+        rating: 4.2,
         imageUrl: "../assets/car3"
     },
     {
@@ -36,7 +36,7 @@ let products = [
         name: "1971 Pontiac GTO Judge",
         price: 120.99,
         quantity: 5,
-        rating: 4.8,
+        rating: 4.0,
         imageUrl: "../assets/car4"
     },
     // Add more predefined products as needed...
@@ -59,10 +59,37 @@ function createProductCard(product) {
 }
 
 //Slide the images on the Home page 
-function slideImage() {
-    let slidingImage = document.getElementById("slideImage");
-    
+function updateProductDetails(index) {
+    const productTitle = document.querySelector(".card-body h1.card-title");
+    const productDescription = document.querySelector(".card-body p.card-text");
+
+    // Set product details from the `products` array
+    const product = products[index];
+    if (product) {
+        productTitle.textContent = product.name;
+        productDescription.innerHTML = `
+            Price: <span class="text-primary fw-bold">$${product.price.toFixed(2)}</span><br>
+            Rating: <span class="text-warning">⭐${product.rating}</span><br>
+            Quantity: <span>${product.quantity}</span>
+        `;
+    }
 }
+
+// Attach an event listener to the Bootstrap carousel
+const carouselElement = document.getElementById("carouselExampleIndicators");
+
+carouselElement.addEventListener("slid.bs.carousel", (event) => {
+    const activeIndex = event.to; // The index of the newly active slide
+    updateProductDetails(activeIndex);
+});
+
+
+// Initialize with the first product details
+document.addEventListener("DOMContentLoaded", () => {
+    updateProductDetails(0); // Start with the first product
+});
+
+
 // Function to render the current list of products in the "New Arrivals" section
 function renderProducts() {
     let productsContainer = document.getElementById('products');
