@@ -75,13 +75,7 @@ function updateProductDetails(index) {
     }
 }
 
-// Attach an event listener to the Bootstrap carousel
-const carouselElement = document.getElementById("carouselExampleIndicators");
 
-carouselElement.addEventListener("slid.bs.carousel", (event) => {
-    const activeIndex = event.to; // The index of the newly active slide
-    updateProductDetails(activeIndex);
-});
 
 
 // Initialize with the first product details
