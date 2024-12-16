@@ -1,0 +1,81 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212; 
+    color: white;
+}
+
+.header {
+    background-color: #1e1e1e; 
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.buttons a {
+    background-color: #f39c12;
+    color: black;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.buttons a:hover {
+    background-color: #e67e22;
+}
+
+h1, h2 {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.card {
+    background-color: #1e1e1e; 
+    border-radius: 10px;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.form-control {
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.form-control:focus {
+    background-color: #444;
+    color: white;
+    outline: none;
+    box-shadow: 0 0 0 2px #f39c12;
+}
+
+.btn-primary {
+    background-color: #f39c12;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #e67e22;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.card-img-top {
+    width: 100%; /* Ensures the image fills the container's width */
+    height: 200px; /* Set a fixed height */
+    object-fit: cover; /* Ensures the image is scaled and cropped to fit */
+}
