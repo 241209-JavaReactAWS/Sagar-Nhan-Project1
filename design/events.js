@@ -4,7 +4,74 @@ let registerButton = document.getElementById ("createUserButton")
 let navbutton = document.querySelectorAll(".nav-bar")
 let sellectButton = document.querySelectorAll(".button")
 
-let dropdowntable = document.querySelector("#account .dropdown");
+
+
+//slide
+
+let products =[
+    {
+        name: "Koeniggsegg",
+        price: 1000.00,
+        quantity: 9,
+        image: "https://via.placeholder.com/150",
+    },
+    {
+        name: "Ram",
+        price: 900.00,
+        quantity: 8,
+        image: "https://via.placeholder.com/150",
+    },
+    {
+        name: "Honda",
+        price: 700.00,
+        quantity: 7,
+        image: "https://via.placeholder.com/150",
+    },
+    {
+        name: "Kia",
+        price: 560.00,
+        quantity: 6,
+        image: "https://via.placeholder.com/150",
+    },
+    {
+        name: "Ford",
+        price: 477.00,
+        quantity: 5,
+        image: "https://via.placeholder.com/150",
+    },
+    {
+        name: "Toyota",
+        price: 350.00,
+        quantity: 4,
+        image: "https://via.placeholder.com/150",
+    },
+    {
+        name: "Acura",
+        price: 880.00,
+        quantity: 3,
+        image: "https://via.placeholder.com/150",
+    }
+];
+console.log("Products:", products);
+function renderProducts() {
+    const productContainer = document.querySelector('.product-container');
+    productContainer.innerHTML = "";
+
+    products.forEach(product => {
+        const productCard = document.createElement('div');
+        productCard.classList.add('product-card');
+        productCard.innerHTML = `
+            <img src="${product.image}" alt="${product.name}" class="product-image">
+            <h4 class="product-name">${product.name}</h4>
+            <p class="product-price">$${product.price.toFixed(2)}</p>
+            <p class="product-quantity">Available: ${product.quantity}</p>
+            <button class="add-to-cart">Add to Cart</button>
+        `;
+        productContainer.appendChild(productCard);
+    });
+}
+document.addEventListener("DOMContentLoaded", renderProducts);
+
 // Create a function that we expect to be called when the button is clicked
 function submitNewUser(){
 
@@ -49,214 +116,92 @@ sellectButton.forEach(button => {
     })
 })
 
-<<<<<<< HEAD
-=======
-
-// // DROPDOWN LOGIN
-// document.getElementById("account").addEventListener('click', function(event){
-//     event.stopPropagation();
-//     dropdowntable.style.display = dropdowntable.style.display === 'block' ? 'none': 'block';
-// });
-
-// // PRevent DROPDOWN CLOSE
-// dropdowntable.addEventListener('click', function(event){
-//     event.stopPropagation();
-// });
-// document.addEventListener("click", function(e){
-//     if (!e.target.closest("account")) {
-//         dropdown.style.display = 'none';
-//     }
-// });
-// registerButton.addEventListener('click', submitNewUser)
->>>>>>> 12de0a7858f74aaf33b0f3a1bbc8f6b2ec00e646
 
 
+// DROPDOWN LOGIN
 
-<<<<<<< HEAD
-// PRevent DROPDOWN CLOSE
-dropdowntable.addEventListener('click', function(event){
+let dropdowntable = document.querySelector("#account .dropdown");
+
+document.getElementById("account").addEventListener('click', function (event) {
+    event.stopPropagation(); // Prevent click propagation
+    dropdowntable.style.display = dropdowntable.style.display === 'block' ? 'none' : 'block';
+});
+
+// Prevent dropdown from closing when clicking inside it
+dropdowntable.addEventListener('click', function (event) {
     event.stopPropagation();
 });
-document.addEventListener("click", function(e){
-    if (!e.target.closest("account")) {
-        dropdown.style.display = 'none';
+
+// Close dropdown when clicking outside
+document.addEventListener("click", function (e) {
+    if (!e.target.closest("#account")) {
+        dropdowntable.style.display = 'none';
     }
 });
+
+
 registerButton.addEventListener('click', submitNewUser)
 
-=======
 
 
+///********** SLIDE LOGIC ***************/
 
-
-
-
-let products = [
-    {
-        id: 1,
-        title: "The Great Gatsby",
-        author: "F. Scott Fitzgerald",
-        genre: "Classic",
-        price: 10.99,
-        rating: 4.8,
-        imageUrl: "./assets/TheGreatGatsby.jpg"
-    },
-    {
-        id: 2,
-        title: "To Kill a Mockingbird",
-        author: "Harper Lee",
-        genre: "Fiction",
-        price: 12.99,
-        rating: 4.9,
-        imageUrl: "../assets/book-cover-To-Kill-a-Mockingbird-many-1961.webp"
-    },
-    {
-        id: 3,
-        title: "1984",
-        author: "George Orwell",
-        genre: "Dystopian",
-        price: 9.99,
-        rating: 4.7,
-        imageUrl: "https://example.com/images/1984.jpg"
-    },
-    {
-        id: 4,
-        title: "The Alchemist",
-        author: "Paulo Coelho",
-        genre: "Philosophy",
-        price: 11.49,
-        rating: 4.6,
-        imageUrl: "https://example.com/images/the-alchemist.jpg"
-    },
-    {
-        id: 5,
-        title: "Harry Potter and the Sorcerer's Stone",
-        author: "J.K. Rowling",
-        genre: "Fantasy",
-        price: 14.99,
-        rating: 4.9,
-        imageUrl: "https://example.com/images/harry-potter-sorcerer-stone.jpg"
-    }
-];
->>>>>>> 12de0a7858f74aaf33b0f3a1bbc8f6b2ec00e646
-
-function createBookCard(product) {
-    return `
-        <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="card h-100 shadow-sm">
-                <img src="${product.imageUrl}" class="card-img-top" alt="${product.title}">
-                <div class="card-body">
-                    <h5 class="card-title">${product.title}</h5>
-                    <p class="card-text">By: ${product.author}</p>
-                    <p class="card-text">Genre: ${product.genre}</p>
-                    <p class="card-text text-primary fw-bold">$${product.price.toFixed(2)}</p>
-                    <p class="card-text text-warning">Rating: ⭐${product.rating}</p>
-                    <button class="btn btn-primary w-100">Add to Cart</button>
-                </div>
-            </div>
-        </div>
-
-    `;
-}
-
-function renderBooks() {
-    console.log("rendering books");
+const imgPosition = document.querySelectorAll(".aspect-ratio img")
+const imgContainer = document.querySelector('.aspect-ratio')
+let imgNumber = imgPosition.length
+let index = 0
+imgPosition.forEach(function(image,index){
+    image.style.left= index*100 + "%"
+})
+function imgSlide(){
+    index++;
+    console.log(index)
+    if(index>= imgNumber) {index =0}
+    imgContainer.style.left ="-" + index*100+ "%"
     
-    let bookList = document.getElementById('book-list');
-    bookList.innerHTML = products.map(createBookCard).join('');
 }
-
-document.addEventListener('DOMContentLoaded', renderBooks);
-
+setInterval(imgSlide, 5000)
 
 
-// // CREATE NEW PRODUCT 
-// let products = [
-//     {
-//       id: 1,
-//       title: "The Great Gatsby",
-//       author: "F. Scott Fitzgerald",
-//       genre: "Classic",
-//       price: 10.99,
-//       rating: 4.8,
-//       imageUrl: "https://example.com/images/great-gatsby.jpg"
-//     },
-//     {
-//       id: 2,
-//       title: "To Kill a Mockingbird",
-//       author: "Harper Lee",
-//       genre: "Fiction",
-//       price: 12.99,
-//       rating: 4.9,
-//       imageUrl: "https://example.com/images/to-kill-a-mockingbird.jpg"
-//     },
-//     {
-//       id: 3,
-//       title: "1984",
-//       author: "George Orwell",
-//       genre: "Dystopian",
-//       price: 9.99,
-//       rating: 4.7,
-//       imageUrl: "https://example.com/images/1984.jpg"
-//     },
-//     {
-//       id: 4,
-//       title: "The Alchemist",
-//       author: "Paulo Coelho",
-//       genre: "Philosophy",
-//       price: 11.49,
-//       rating: 4.6,
-//       imageUrl: "https://example.com/images/the-alchemist.jpg"
-//     },
-//     {
-//       id: 5,
-//       title: "Harry Potter and the Sorcerer's Stone",
-//       author: "J.K. Rowling",
-//       genre: "Fantasy",
-//       price: 14.99,
-//       rating: 4.9,
-//       imageUrl: "https://example.com/images/harry-potter-sorcerer-stone.jpg"
-//     }
-//   ];
 
 // function createProductCard(product) {
-//     let productCard = document.createElement("div");
-//     productCard.classList.add('product-card');
+    // let productCard = document.createElement("div");
+    // productCard.classList.add('product-card');
 
-//     let productImage = document.createElement ('img');
-//     productImage.classList.add('product-image');
+    // let productImage = document.createElement ('img');
+    // productImage.classList.add('product-image');
 
-//     let productName = document.createElement ('h4');
-//     productName.textContent = product.title;
+    // let productName = document.createElement ('h4');
+    // productName.textContent = product.name;
 
-//     let productPrice = document.createElement ('p');
-//     productPrice.classList.add('product-price');
-//     productPrice.textContent = `$${product.price}`;
+    // let productPrice = document.createElement ('p');
+    // productPrice.classList.add('product-price');
+    // productPrice.textContent = `$${product.price}`;
 
-//     let productQuantity = document.createElement('p');
-//     productQuantity.textContent = `Quantity: ${product.quantity}`;
+    // let productQuantity = document.createElement('p');
+    // productQuantity.textContent = `Quantity: ${product.quantity}`;
 
-//     let addToCartButton = document.createElement('button');
-//     addToCartButton.classList.add('add-to-cart');
-//     addToCartButton.textContent = 'Add to Cart';
+    // let addToCartButton = document.createElement('button');
+    // addToCartButton.classList.add('add-to-cart');
+    // addToCartButton.textContent = 'Add to Cart';
 
-//     productCard.appendChild(productImage);
-//     productCard.appendChild(productName);
-//     productCard.appendChild(productPrice);
-//     productCard.appendChild(productQuantity);
-//     productCard.appendChild(addToCartButton);
-    
-//     return productCard;
+    // productCard.appendChild(productImage);
+    // productCard.appendChild(productName);
+    // productCard.appendChild(productPrice);
+    // productCard.appendChild(productQuantity);
+    // productCard.appendChild(addToCartButton);
+    // 
+    // return productCard;
 // }
 
-// // MAKE IT SHOW IN THE PRODUCT CONTAINER 
+// MAKE IT SHOW IN THE PRODUCT CONTAINER 
 
 // function listProduct() {
-//     let productContainer = document.getElementById('product-container');
-//     productContainer.innerHTML = ``;
-
-//     products.forEach(product =>{
-//         let productCard = createProductCard(product);
-//         productContainer.appendChild(productCard);
-//      }) 
+    // let productContainer = document.getElementById('product-container');
+    // productContainer.innerHTML = '';
+// 
+    // products.forEach(product =>{
+        // let productCard = createProductCard(product);
+        // productContainer.appendChild(productCard);
+    //  }) 
 // }
