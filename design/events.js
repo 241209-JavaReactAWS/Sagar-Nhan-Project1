@@ -49,8 +49,6 @@ sellectButton.forEach(button => {
     })
 })
 
-<<<<<<< HEAD
-=======
 
 // // DROPDOWN LOGIN
 // document.getElementById("account").addEventListener('click', function(event){
@@ -68,23 +66,9 @@ sellectButton.forEach(button => {
 //     }
 // });
 // registerButton.addEventListener('click', submitNewUser)
->>>>>>> 12de0a7858f74aaf33b0f3a1bbc8f6b2ec00e646
 
 
 
-<<<<<<< HEAD
-// PRevent DROPDOWN CLOSE
-dropdowntable.addEventListener('click', function(event){
-    event.stopPropagation();
-});
-document.addEventListener("click", function(e){
-    if (!e.target.closest("account")) {
-        dropdown.style.display = 'none';
-    }
-});
-registerButton.addEventListener('click', submitNewUser)
-
-=======
 
 
 
@@ -138,35 +122,32 @@ let products = [
         imageUrl: "https://example.com/images/harry-potter-sorcerer-stone.jpg"
     }
 ];
->>>>>>> 12de0a7858f74aaf33b0f3a1bbc8f6b2ec00e646
 
 function createBookCard(product) {
     return `
-        <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="card h-100 shadow-sm">
-                <img src="${product.imageUrl}" class="card-img-top" alt="${product.title}">
-                <div class="card-body">
-                    <h5 class="card-title">${product.title}</h5>
-                    <p class="card-text">By: ${product.author}</p>
-                    <p class="card-text">Genre: ${product.genre}</p>
-                    <p class="card-text text-primary fw-bold">$${product.price.toFixed(2)}</p>
-                    <p class="card-text text-warning">Rating: ⭐${product.rating}</p>
-                    <button class="btn btn-primary w-100">Add to Cart</button>
-                </div>
+        <div class="card" style="width: 18rem; flex: 0 0 auto;">
+            <img src="${product.imageUrl}" class="card-img-top" alt="${product.title}">
+            <div class="card-body">
+                <h5 class="card-title">${product.title}</h5>
+                <p class="card-text">By: ${product.author}</p>
+                <p class="card-text text-primary fw-bold">$${product.price.toFixed(2)}</p>
+                <p class="card-text text-warning">Rating: ⭐${product.rating}</p>
+                <a href="#" class="btn btn-primary">Add to Cart</a>
             </div>
         </div>
-
     `;
 }
 
 function renderBooks() {
-    console.log("rendering books");
-    
-    let bookList = document.getElementById('book-list');
-    bookList.innerHTML = products.map(createBookCard).join('');
+    console.log("Rendering books...");
+
+    let productsContainer = document.getElementById('products');
+    productsContainer.innerHTML = products.map(createBookCard).join('');
 }
 
+// Ensure the function is called on DOM load
 document.addEventListener('DOMContentLoaded', renderBooks);
+
 
 
 
