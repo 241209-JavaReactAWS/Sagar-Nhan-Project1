@@ -3,9 +3,11 @@ package com.revature.eCommerce.service;
 import com.revature.eCommerce.entity.Product;
 import com.revature.eCommerce.resposity.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ProductService {
 
     @Autowired
@@ -29,9 +31,9 @@ public class ProductService {
     public Product updateProductById(Long id, Product updatedProduct){
         return productRepository.findById(id).map(product -> 
         {
-            product.setName(updatedProduct.getName());
+            product.setProductName(updatedProduct.getProductName());
             product.setPrice(updatedProduct.getPrice());
-            product.setQuantity(updatedProduct.getQuantity());
+            product.setAvailableQuantity(updatedProduct.getAvailableQuantity());
             product.setImageUrl(updatedProduct.getImageUrl());
             return productRepository.save(product);
             

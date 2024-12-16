@@ -3,20 +3,20 @@ package com.revature.eCommerce.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name ="Product")
+@Table(name ="products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long productId;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "product_name", nullable = false)
+    private String productName;
 
     @Column(name = "price", nullable = false)
     private Double price;
 
-    @Column(name = "quantity", nullable = false)
-    private Integer quantity ;
+    @Column(name = "available_quantity", nullable = false)
+    private Integer availableQuantity ;
 
     private String imageUrl;
 
@@ -28,11 +28,11 @@ public class Product {
         this.productId =productId;
     }
 
-    public String getName (){
-        return name;
+    public String getProductName (){
+        return productName;
     }
-    public void setName (String name) {
-        this.name = name;
+    public void setProductName (String name) {
+        this.productName = productName;
     }
 
     public Double getPrice () {
@@ -42,11 +42,11 @@ public class Product {
         this.price = price;
     }
 
-    public Integer getQuantity (){
-        return quantity;
+    public Integer getAvailableQuantity (){
+        return availableQuantity;
     }
-    public void setQuantity (Integer quantity){
-        this.quantity = quantity;
+    public void setAvailableQuantity (Integer availableQuantity){
+        this.availableQuantity = availableQuantity;
     }
 
     public String getImageUrl() {

@@ -4,24 +4,27 @@ import jakarta.persistence.*;
 import jakarta.persistence.Table;
 import org.jetbrains.annotations.*;
 
+import java.io.Serializable;
+
 @Entity
-@Table(name ="Account")
+@Table(name ="account")
 
-public class Account {
+public class Account implements Serializable {
 
-    @Column(name="User_id")
+    @Column(name="user_id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer userId;
 
-    @Column(name="Username")
+    @Column(name="username")
     private String username;
 
     @Column(name= "password_hash")
     private String passwordHash;
 
-    @Column(name="role_name")
-    private String roleName;
+    @ManyToOne
+    @JoinColumn(name="role_id" , referencedColumnName= "role_id" ,nullable = false )
+    private Role role;
 
 
     public Account(String username, String passwordHash) {
@@ -29,12 +32,6 @@ public class Account {
         this.passwordHash = passwordHash;
     }
 
-    public Account(Integer userId, String username, String passwordHash, String roleName) {
-        this.userId = userId;
-        this.username = username;
-        this.passwordHash = passwordHash;
-        this.roleName = roleName;
-    }
 
     public Integer getUserId() {
         return userId;
@@ -60,12 +57,12 @@ public class Account {
         this.passwordHash = passwordHash;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public Role getRoleName() {
+        return role;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setRoleName(Role role) {
+        this.role = role;
     }
 
     public String toString() {
@@ -73,7 +70,7 @@ public class Account {
                 "userId  = " + userId +
                 ", username    = " + username + '\'' +
                 ", password = " + passwordHash + '\'' +
-                ", roleName = " + roleName + '\'' +
+                ", roleName = " + role + '\'' +
                 "} ";
     }
 }

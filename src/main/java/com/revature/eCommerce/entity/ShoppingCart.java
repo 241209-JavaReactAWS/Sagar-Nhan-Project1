@@ -3,7 +3,7 @@ package com.revature.eCommerce.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="shoping_carts")
+@Table(name="shopping_cart")
 public class ShoppingCart {
 
     @Id
@@ -14,6 +14,6 @@ public class ShoppingCart {
     private long total;
 
     @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "User_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private Account user;
 }

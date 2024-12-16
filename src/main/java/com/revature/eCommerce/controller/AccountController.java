@@ -2,7 +2,9 @@ package com.revature.eCommerce.controller;
 
 
 import com.revature.eCommerce.entity.Account;
+import com.revature.eCommerce.entity.Role;
 import com.revature.eCommerce.service.AccountService;
+import com.revature.eCommerce.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,8 @@ import java.util.Optional;
 @RequestMapping("/accounts")
 public class AccountController {
 
+    @Autowired
+    private RoleService roleService;
     @Autowired
     private AccountService accountService;
 
@@ -37,5 +41,10 @@ public class AccountController {
     public ResponseEntity<Void> deleteAccount(@PathVariable Integer userId) {
         accountService.deleteAccount(userId);
         return ResponseEntity.noContent().build();
+    }
+    ///************ROLE CONTROLLER*************** ///
+    @PutMapping("/roles/{id}")
+    public Role updateRole (@PathVariable("id") Integer roleId, @RequestBody String roleName){
+        return roleService.updateRole(roleId, roleName);
     }
 }

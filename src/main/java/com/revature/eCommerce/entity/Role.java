@@ -8,35 +8,31 @@ import jakarta.persistence.*;
 public class Role {
 
     @Id
+
     @Column(name="role_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer role_id;
+    private Integer roleId;
 
-    @Column(name = "Role_name", nullable = false)
+
+    @Column(name = "role_name", nullable = false, unique = true)
     private String roleName;
 
 
     public Integer getRoleId() {
-        return role_id;
+        return roleId;
     }
 
-    public void setRoleId(Integer role_id) {
-        this.role_id = role_id;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     public String getRoleName() {
         return roleName;
     }
 
-    public void setName(String roleName) {
+    public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
 
-    public String toString() {
-        return "Role {" +
-                "role_id=" + role_id + ", " +
-                "name=" + roleName + ", " +
 
-                "}";
-    }
 }

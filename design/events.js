@@ -49,7 +49,6 @@ sellectButton.forEach(button => {
     })
 })
 
-registerButton.addEventListener('click', submitNewUser)
 
 
 // DROPDOWN LOGIN
@@ -61,12 +60,14 @@ document.getElementById("account").addEventListener('click', function(event){
 // PRevent DROPDOWN CLOSE
 dropdowntable.addEventListener('click', function(event){
     event.stopPropagation();
-})
+});
 document.addEventListener("click", function(e){
     if (!e.target.closest("account")) {
         dropdown.style.display = 'none';
     }
-})
+});
+registerButton.addEventListener('click', submitNewUser)
+
 
 // CREATE NEW PRODUCT 
 let products =[];
