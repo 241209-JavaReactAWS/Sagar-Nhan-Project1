@@ -13,11 +13,12 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/accounts")
+@RequestMapping("/account")
 public class AccountController {
 
     @Autowired
     private RoleService roleService;
+
     @Autowired
     private AccountService accountService;
 
@@ -26,7 +27,7 @@ public class AccountController {
         return accountService.getAllAccounts();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{userId}")
     public ResponseEntity<Account> getAccountById (@PathVariable Integer userId){
         Optional<Account> account =  accountService.getAccountById(userId);
         return account.map(ResponseEntity::ok)                      // If present return 200 OK
@@ -37,14 +38,19 @@ public class AccountController {
         return accountService.createAccount(account);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{userId}")
     public ResponseEntity<Void> deleteAccount(@PathVariable Integer userId) {
         accountService.deleteAccount(userId);
         return ResponseEntity.noContent().build();
     }
     ///************ROLE CONTROLLER*************** ///
-    @PutMapping("/roles/{id}")
-    public Role updateRole (@PathVariable("id") Integer roleId, @RequestBody String roleName){
+    @PutMapping("/roles/{roleId}")
+    public Role updateRole (@PathVariable("roleId") Integer roleId, @RequestBody String roleName){
         return roleService.updateRole(roleId, roleName);
     }
+    @GetMapping("/roles")
+    public List<Role> getAllRole(){
+        return roleService.getAllRole();
+    }
+
 }
