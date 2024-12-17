@@ -131,3 +131,52 @@ background-color: #2b2a29;
 a#signup-link {
     background: none;
 }
+
+/**NEW ACCOUNT***/
+div .new-customer {
+    border: 2px solid #2b2a29;
+    border-radius: 10px;
+    background-color: #2b2a29;
+    padding: 10px;
+    
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+div .new-customer p {
+    background-color: #2b2a29; /* Light background */
+    color: #d6cece;
+    font-size: 0.9rem; /* Smaller text */
+    line-height: 1.5;
+  
+}
+h4 {
+    color: #f39c12;
+    background: none;
+}
+.new-customer h4 {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.new-customer ul {
+    padding-left: 1rem; /* Indentation for bullet points */
+}
+li{ 
+    
+    list-style: disc;
+    color: #f39c12;
+    background: #2b2a29;
+
+}
+ul {
+    background: none;
+}
+
+
+div .text-center {
+    background-color: #2b2a29;
+}
+.new-customer .btn {
+    font-size: 0.9rem;
+    padding: 5px 10px;
+}
