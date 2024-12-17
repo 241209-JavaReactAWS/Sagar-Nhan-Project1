@@ -1,0 +1,133 @@
+*{
+    background-color:#484645 ;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: #484645;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+}
+.header {
+    position: relative;
+    
+    width: 100%;
+    padding: 20px 20px; /* Add padding to push content down */
+    margin-top: 30px; /* Moves the header down */
+    z-index: 10;
+    left: 0;
+    background-color: #484645;
+    z-index: 3;
+}
+
+.header .buttons a {
+    background-color: #f39c12; /* Button color */
+    color: black;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    
+}
+.container{
+   
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: auto;
+}
+.container .card {
+    display: block;
+    position: relative;
+    align-items: center;
+    height: auto;
+
+    width: 50%;
+    object-fit: cover;
+    top: 100px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    color: #2b2a29;
+    background-color: #2b2a29;
+    text-align: center;
+  }
+  input {
+    text-align: center;
+  }
+  .card-title {
+    color:rgb(158, 98, 34);
+    font-size: 2rem;
+  }
+
+  div .mb-3, form {
+    background-color: #2b2a29 ;
+    margin-bottom: 10px;
+
+  }
+  .main-title {
+    position: relative;
+    text-align: center;
+  }
+  h2 {
+    position: relative;
+    text-transform: uppercase;
+    font-size: 3rem;
+    font-weight: 700;
+    z-index: 0;
+   
+    background-color: #484645;
+    transform: translate(0%, 10%);
+  }
+  h3 {
+    font-size: 3rem;
+font-weight: 700;
+z-index: 0;
+background-color: #2b2a29;
+  }
+  
+  .main-title #s {
+    position: relative;
+    left: 0%;
+    color: rgb(158, 98, 34);
+    z-index: 10;
+    background: none;
+    font-size: 6.3rem;
+    font-weight: 700;
+
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  }
+  .main-title #diecast {
+    position: relative;
+   
+    left: 10px;
+    transform: translate(20%, 10%);
+    color: rgb(234, 232, 230);
+    z-index: 2;
+    background: none;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  }
+  .bg-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-family: Georgia, serif;
+    margin-top: 40px;
+    transform: translate(-50%, -50%);
+    transition: all  .4s ease-in-out;
+    color:#383736;
+    z-index: -1;
+    font-weight: 800;
+    font-size: 5rem;
+    background: none;
+    background-color: #484645;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  }
+/** ADMIN LOGIN**/
+a#signup-link {
+    background: none;
+}

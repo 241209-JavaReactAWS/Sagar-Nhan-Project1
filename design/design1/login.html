@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div></div>
+    <div id="login" class="text-center">
+        <form action="form-login">
+            <div id="signin">Sign in</div>
+
+            <label for="username"></label>
+            <input id="username"  type="text" placeholder="Username" class="form-control" required>
+
+            <label for="password"></label>
+            <input id="password" type="password" placeholder="Password"  maxlength="50"  class="form-control" required >
+            
+            <div id="noaccount"> <a href="register.html" id="signup-link">Don't have an account ?</a></div>
+            
+            <button id="loginbutton" type="submit">Login</button>
+            <div id="loginOptions">Or login with</div>
+        </form>
+    </div>
+</body>
+</html>

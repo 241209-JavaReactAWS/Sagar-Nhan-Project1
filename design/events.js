@@ -13,7 +13,7 @@ let products = [
         price: 10.99,
         quantity: 5,
         rating: 4.9,
-        imageUrl: "../assets/car1"
+        imageUrl: "./assets/car1.jpg"
     },
     {
         id: 2,
@@ -21,7 +21,7 @@ let products = [
         price: 510.99,
         quantity: 5,
         rating: 4.3,
-        imageUrl: "../assets/car2"
+        imageUrl: "./assets/car2.jpg"
     },
     {
         id: 3,
@@ -29,7 +29,7 @@ let products = [
         price: 101.99,
         quantity: 5,
         rating: 4.2,
-        imageUrl: "../assets/car3"
+        imageUrl: "./assets/car3.jpg"
     },
     {
         id: 4,
@@ -37,7 +37,31 @@ let products = [
         price: 120.99,
         quantity: 5,
         rating: 4.0,
-        imageUrl: "../assets/car4"
+        imageUrl: "./assets/car4.jpg"
+    },
+    {
+        id: 5,
+        name: "The Monkeemobile",
+        price: 510.99,
+        quantity: 5,
+        rating: 4.3,
+        imageUrl: "./assets/car5.jpg"
+    },
+    {
+        id: 6,
+        name: "Car",
+        price: 101.99,
+        quantity: 5,
+        rating: 4.2,
+        imageUrl: "./assets/car6.jpg"
+    },
+    {
+        id: 7,
+        name: "1971 Pontiac GTO Judge",
+        price: 120.99,
+        quantity: 5,
+        rating: 4.0,
+        imageUrl: "./assets/car7.jpg"
     },
     // Add more predefined products as needed...
 ];
@@ -146,3 +170,24 @@ sellectButton.forEach(button => {
         }
     });
 });
+// ADD NEW PRODUCT
+async function addProduct() {
+    const product = {
+        name: document.getElementById('product-name').value,
+        price: parseFloat(document.getElementById('product-price').value)
+    };
+
+    try {
+        const response = await fetch('http://localhost:8080/products', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(product)
+        });
+
+        if (!response.ok) throw new Error('Failed to add product');
+        alert('Product added successfully!');
+        fetchProducts(); // Refresh the product list
+    } catch (error) {
+        console.error('Error adding product:', error);
+    }
+}
