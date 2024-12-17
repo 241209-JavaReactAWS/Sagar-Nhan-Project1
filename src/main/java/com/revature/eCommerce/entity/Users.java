@@ -13,7 +13,7 @@ public class Users {
     private Integer userId;
 
     @OneToOne
-    @JoinColumn(name="User_id")
+    @JoinColumn(name="User_id",  referencedColumnName = "user_id")
     private Account account;
 
     @Column(name = "First_name", nullable = false)

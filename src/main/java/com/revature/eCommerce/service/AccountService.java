@@ -2,6 +2,7 @@ package com.revature.eCommerce.service;
 
 import com.revature.eCommerce.entity.Account;
 import com.revature.eCommerce.resposity.AccountRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.Optional;
 @Service
 public class AccountService {
 
+    @Autowired
     private AccountRepository accountRepository;
 
     public Account createAccount(Account account){

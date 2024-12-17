@@ -14,6 +14,10 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer orderId;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
+    private Users user;
+
     @Column(name = "total_amount", nullable = false)
     private Double totalAmount;
 
@@ -53,5 +57,13 @@ public class Orders {
 
     public void setAtTime(LocalDateTime atTime) {
         this.atTime = atTime;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
     }
 }

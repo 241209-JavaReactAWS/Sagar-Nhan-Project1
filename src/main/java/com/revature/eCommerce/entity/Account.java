@@ -26,6 +26,7 @@ public class Account implements Serializable {
     @JoinColumn(name="role_id" , referencedColumnName= "role_id" ,nullable = false )
     private Role role;
 
+    private Account(){};
 
     public Account(String username, String passwordHash) {
         this.username = username;
