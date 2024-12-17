@@ -15,6 +15,12 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.bi-cart {
+    width: 24px;
+    height: 24px;
+    color: #007bff; /* Change the color */
+}
+
 .buttons a {
     background-color: #f39c12;
     color: black;

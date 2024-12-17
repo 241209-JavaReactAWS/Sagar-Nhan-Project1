@@ -13,7 +13,7 @@ let products = [
         price: 10.99,
         quantity: 5,
         rating: 4.9,
-        imageUrl: "../assets/car1"
+        imageUrl: "../../assests/car1.jpg"
     },
     {
         id: 2,
@@ -21,7 +21,7 @@ let products = [
         price: 510.99,
         quantity: 5,
         rating: 4.3,
-        imageUrl: "../assets/car2"
+        imageUrl: "../../assests/car2.jpg"
     },
     {
         id: 3,
@@ -29,7 +29,7 @@ let products = [
         price: 101.99,
         quantity: 5,
         rating: 4.2,
-        imageUrl: "../assets/car3"
+        imageUrl: "../../assests/car3.jpg"
     },
     {
         id: 4,
@@ -37,7 +37,7 @@ let products = [
         price: 120.99,
         quantity: 5,
         rating: 4.0,
-        imageUrl: "../assets/car4"
+        imageUrl: "../../assests/car4.jpg"
     },
     // Add more predefined products as needed...
 ];
@@ -60,9 +60,6 @@ function createProductCard(product) {
 
 //Slide the images on the Home page 
 function updateProductDetails(index) {
-    const productTitle = document.querySelector(".card-body h1.card-title");
-    const productDescription = document.querySelector(".card-body p.card-text");
-
     // Set product details from the `products` array
     const product = products[index];
     if (product) {
