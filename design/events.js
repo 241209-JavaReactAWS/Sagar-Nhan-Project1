@@ -4,7 +4,7 @@ let registerButton = document.getElementById("createUserButton")
 let navbutton = document.querySelectorAll(".nav-bar")
 let sellectButton = document.querySelectorAll(".button")
 let dropdowntable = document.querySelector("#account .dropdown");
-
+const sectBtns = document.querySelectorAll(".buttons")
 // Sample products for display (New Arrivals)
 let products = [
     {
@@ -191,3 +191,4 @@ async function addProduct() {
         console.error('Error adding product:', error);
     }
 }
+
