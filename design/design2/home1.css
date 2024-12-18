@@ -12,6 +12,7 @@
   display: inline-block; /* Ensure they stay together in a single line */
 }
 
+<<<<<<< HEAD:design/home1.css
 #diecast {
   position: absolute;
   top: -10%;
@@ -20,6 +21,23 @@
   color: rgb(234, 232, 230);
   z-index: 2;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+=======
+.bi-cart {
+        width: 24px;
+        height: 24px;
+        color: #007bff; /* Change the color */
+    }
+
+.buttons a {
+    background-color: #f39c12;
+    color: black;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+>>>>>>> 2053ffdd38d18b0e81d893a32be97a98d2db2b2d:design/design2/home1.css
 }
 
 #s {
