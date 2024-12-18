@@ -9,25 +9,29 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/cart")
+@RequestMapping("/shopping-cart")
 public class CartController {
 
     @Autowired
 
     private CartService cartService;
 
-    @GetMapping ("/{userId}")
-    public ResponseEntity<ShoppingCart> getCartByUserId(@PathVariable Integer userId){
-        ShoppingCart cart= cartService.getCartByUserId(userId);
-        if (cart ==null){
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<ShoppingCart> getCartByUserId(@PathVariable Integer userId) {
+        ShoppingCart cart = cartService.getCartByUserId(userId);
+        if (cart == null) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(cart);
     }
 
-    @PostMapping
-    public ResponseEntity<ShoppingCart> CreateOrUpdateCart (@RequestBody ShoppingCart cart){
-        ShoppingCart updateCart = cartService.createAndUpdateCart(cart);
-        return ResponseEntity.ok(updateCart);
+    @PostMapping("/{userId}/addItems/{productId}")
+    public ResponseEntity<ShoppingCart> addProductToCart(
+            @PathVariable Integer userId,
+            @PathVariable Long productId,
+            @RequestParam Integer quantity) {
+
+        ShoppingCart updatedCart = cartService.addProductToCart(userId, productId, quantity);
+        return ResponseEntity.ok(updatedCart);
     }
 }

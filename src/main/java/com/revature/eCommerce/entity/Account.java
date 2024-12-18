@@ -11,22 +11,23 @@ import java.io.Serializable;
 
 public class Account implements Serializable {
 
-    @Column(name="user_id")
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="user_id")
     private Integer userId;
 
-    @Column(name="username")
+    @Column(name="username", nullable = false, unique = true)
     private String username;
 
-    @Column(name= "password_hash")
+    @Column(name= "password_hash", nullable = false)
     private String passwordHash;
 
     @ManyToOne
     @JoinColumn(name="role_id" , referencedColumnName= "role_id" ,nullable = false )
     private Role role;
 
-    private Account(){};
+
 
     public Account(String username, String passwordHash) {
         this.username = username;
@@ -71,7 +72,7 @@ public class Account implements Serializable {
                 "userId  = " + userId +
                 ", username    = " + username + '\'' +
                 ", password = " + passwordHash + '\'' +
-                ", roleName = " + role + '\'' +
+                ", roleName = " + (role != null ? role.getRoleName() : "null") +
                 "} ";
     }
 }

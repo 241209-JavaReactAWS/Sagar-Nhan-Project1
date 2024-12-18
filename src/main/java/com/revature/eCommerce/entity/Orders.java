@@ -9,9 +9,10 @@ import java.time.LocalDateTime;
 @Table(name="orders")
 public class Orders {
 
-    @Column(name="order_id")
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="order_id")
     private Integer orderId;
 
     @ManyToOne
@@ -34,7 +35,9 @@ public class Orders {
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
     }
-
+    public Orders() {
+        this.atTime = LocalDateTime.now();
+    }
     public Double getTotalAmount() {
         return totalAmount;
     }

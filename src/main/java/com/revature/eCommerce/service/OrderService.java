@@ -15,9 +15,12 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
+    /*** GET ALL ORDERS FROM USER ID*****/
     public List<Orders> getAllOrdersFromUserId(Integer userId){
         return orderRepository.findByUser_UserId(userId);
     }
+
+    /******* SINGLE ORDER BY ORDER ID ****/
     public Orders getOrderByOrderId(Integer orderId){
         Optional<Orders> optionalOrders =orderRepository.findById(orderId);
         return optionalOrders.orElse(null);

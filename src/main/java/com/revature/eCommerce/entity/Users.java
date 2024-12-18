@@ -16,16 +16,16 @@ public class Users {
     @JoinColumn(name="User_id",  referencedColumnName = "user_id")
     private Account account;
 
-    @Column(name = "First_name", nullable = false)
+    @Column(name = "First_name", nullable = true)
     private String firstName;
 
-    @Column(name = "Last_name", nullable = false)
+    @Column(name = "Last_name", nullable = true)
     private String lastName;
 
-    @Column(name = "Email", unique=true, nullable = false)
+    @Column(name = "Email", unique=true, nullable = true)
     private String email;
 
-    @Column(name= "Address", nullable = false)
+    @Column(name= "Address", nullable = true)
     private String address;
 
     @Column(name = "Phone")
