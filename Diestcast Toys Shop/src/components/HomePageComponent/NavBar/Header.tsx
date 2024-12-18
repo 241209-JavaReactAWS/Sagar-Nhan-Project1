@@ -18,9 +18,11 @@ const Header: React.FC = () => (
         <Link to="/login" className="btn btn-warning text-dark fw-bold me-3">
           Login/Register
         </Link>
-        <Link to="/admin" className="btn btn-secondary text-white fw-bold">
-          Admin
+        {/* Cart Button */}
+        <Link to="/cart" className="btn btn-outline-light text-white d-flex align-items-center justify-content-center p-2">
+          <i className="fas fa-shopping-cart fs-4"></i> {/* Font Awesome cart icon with size */}
         </Link>
+
       </div>
     </div>
   </header>

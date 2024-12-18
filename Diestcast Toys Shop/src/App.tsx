@@ -2,12 +2,12 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ProductPage from './pages/ProductPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
-import LoginPage from './pages/LoginPage'; // New Page
-import RegisterPage from './pages/RegisterPage'; // New Page
-import AdminPage from './pages/AdminPage'; // New Page
+import LoginPage from './pages/LoginPage';
+import CartPage from './pages/CartPage';  // Import CartPage
+import RegisterPage from './pages/RegisterPage';  // Import RegisterPage
 import { Product as ProductType } from './types/productTypes';
 import Header from './components/HomePageComponent/NavBar/Header';
-import HomePage from './pages/HomePage'; // Add HomePage
+import HomePage from './pages/HomePage';
 
 const products: ProductType[] = [
   { id: 1, name: 'Car', description: 'Koeniggsegg', price: 1000.0, quantity: 9 },
@@ -28,12 +28,12 @@ const App: React.FC = () => {
       <br />
       <div className="container mt-5">
         <Routes>
-          <Route path="/" element={<HomePage />} /> {/* HomePage Route */}
-          <Route path="/products" element={<ProductPage products={products} />} /> {/* Product Page Route */}
+          <Route path="/" element={<HomePage />} />
+          <Route path="/products" element={<ProductPage products={products} />} />
           <Route path="/product/:productId" element={<ProductDetailsPage products={products} />} />
-          <Route path="/login" element={<LoginPage />} /> {/* Login Page Route */}
-          <Route path="/register" element={<RegisterPage />} /> {/* Register Page Route */}
-          <Route path="/admin" element={<AdminPage />} /> {/* Admin Page Route */}
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} /> {/* Add RegisterPage Route */}
+          <Route path="/cart" element={<CartPage />} />
         </Routes>
       </div>
     </Router>
