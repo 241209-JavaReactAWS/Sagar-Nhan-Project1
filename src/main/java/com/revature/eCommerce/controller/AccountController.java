@@ -17,6 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/account")
+@CrossOrigin(origins = "http://localhost:5173")
 public class AccountController {
 
     @Autowired
@@ -68,7 +69,6 @@ public class AccountController {
     /************LOGIN ACCOUNT************/
     @PostMapping("/login")
     public ResponseEntity<?> loginAccount(@RequestBody Account account, HttpSession session) {
-
         Account authenticatedAccount = accountService.loginAccount(account.getUsername(), account.getPasswordHash());
         if (authenticatedAccount == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
