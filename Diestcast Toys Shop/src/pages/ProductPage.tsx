@@ -9,7 +9,7 @@ interface ProductPageProps {
 
 const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
   return (
-    <div className="product-container">
+    <div className="product-container mt-5">
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}

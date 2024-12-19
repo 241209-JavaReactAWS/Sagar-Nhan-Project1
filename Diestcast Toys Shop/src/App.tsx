@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { createContext, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ProductPage from './pages/ProductPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
 import LoginPage from './pages/LoginPage';
-import CartPage from './pages/CartPage';  // Import CartPage
-import RegisterPage from './pages/RegisterPage';  // Import RegisterPage
-import { Product as ProductType } from './types/productTypes';
+import CartPage from './pages/CartPage';
+import RegisterPage from './pages/RegisterPage';
 import Header from './components/HomePageComponent/NavBar/Header';
 import HomePage from './pages/HomePage';
+import { Product as ProductType } from './types/productTypes';
+
+// Define the AuthContext type
+export interface AuthContextType {
+  username: string;
+  setUsername: (username: string) => void;
+  role: "unauthenticated" | "USER" | "ADMIN";
+  setRole: (role: "unauthenticated" | "USER" | "ADMIN") => void;
+}
+
+// Create the AuthContext
+export const AuthContext = createContext<AuthContextType | null>(null);
 
 const products: ProductType[] = [
   { id: 1, name: 'Car', description: 'Koeniggsegg', price: 1000.0, quantity: 9 },
@@ -22,21 +33,28 @@ const products: ProductType[] = [
 ];
 
 const App: React.FC = () => {
+  // Authentication state
+  const [username, setUsername] = useState<string>('');
+  const [role, setRole] = useState<"unauthenticated" | "USER" | "ADMIN">('unauthenticated');
+
   return (
-    <Router>
-      <Header />
-      <br />
-      <div className="container mt-5">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/products" element={<ProductPage products={products} />} />
-          <Route path="/product/:productId" element={<ProductDetailsPage products={products} />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} /> {/* Add RegisterPage Route */}
-          <Route path="/cart" element={<CartPage />} />
-        </Routes>
-      </div>
-    </Router>
+    // Provide the AuthContext
+    <AuthContext.Provider value={{ username, setUsername, role, setRole }}>
+      <Router>
+        <Header />
+        
+        <div className="container mt-1 pt-1">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/products" element={<ProductPage products={products} />} />
+            <Route path="/product/:productId" element={<ProductDetailsPage products={products} />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/cart" element={<CartPage />} />
+          </Routes>
+        </div>
+      </Router>
+    </AuthContext.Provider>
   );
 };
 

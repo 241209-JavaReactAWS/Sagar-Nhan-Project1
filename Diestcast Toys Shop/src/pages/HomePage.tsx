@@ -13,7 +13,7 @@ const newArrivals = [
 const HomePage: React.FC = () => (
   <>
     <Header />
-    <main className="container mt-5 pt-5">
+    <main className="container mt-4 pt-5">
       {/* Container for Carousel and Description with rounded borders */}
       <div className="container" style={{ backgroundColor: 'rgb(33, 37, 41)', padding: '30px', borderRadius: '15px' }}>
         <div className="row">
@@ -37,7 +37,7 @@ const HomePage: React.FC = () => (
                 <strong>Features:</strong> High-quality materials, realistic designs, and great attention to detail.
               </p>
               <p className="mt-4">
-                <a href="/shop" className="btn btn-" style={{ backgroundColor: '#ffc107', color: '#000', borderColor:'#ffc107' }}>Shop Now</a>
+                <a href="/products" className="btn btn-" style={{ backgroundColor: '#ffc107', color: '#000', borderColor:'#ffc107' }}>Shop Now</a>
               </p>
             </div>
           </div>
