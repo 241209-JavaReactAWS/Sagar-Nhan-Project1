@@ -7,14 +7,15 @@ import CartPage from './pages/CartPage';
 import RegisterPage from './pages/RegisterPage';
 import Header from './components/HomePageComponent/NavBar/Header';
 import HomePage from './pages/HomePage';
+import AdminDashboard from './pages/AdminDashboard'; // Import AdminDashboard component
 import { Product as ProductType } from './types/productTypes';
 
 // Define the AuthContext type
 export interface AuthContextType {
   username: string;
   setUsername: (username: string) => void;
-  role: "unauthenticated" | "USER" | "ADMIN";
-  setRole: (role: "unauthenticated" | "USER" | "ADMIN") => void;
+  role: 'unauthenticated' | 'USER' | 'ADMIN';
+  setRole: (role: 'unauthenticated' | 'USER' | 'ADMIN') => void;
 }
 
 // Create the AuthContext
@@ -35,14 +36,14 @@ const products: ProductType[] = [
 const App: React.FC = () => {
   // Authentication state
   const [username, setUsername] = useState<string>('');
-  const [role, setRole] = useState<"unauthenticated" | "USER" | "ADMIN">('unauthenticated');
+  const [role, setRole] = useState<'unauthenticated' | 'USER' | 'ADMIN'>('unauthenticated');
 
   return (
     // Provide the AuthContext
     <AuthContext.Provider value={{ username, setUsername, role, setRole }}>
       <Router>
         <Header />
-        
+
         <div className="container mt-1 pt-1">
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -51,6 +52,7 @@ const App: React.FC = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/cart" element={<CartPage />} />
+            <Route path="/admin-dashboard" element={<AdminDashboard products={products}/>} /> {/* Added route */}
           </Routes>
         </div>
       </Router>

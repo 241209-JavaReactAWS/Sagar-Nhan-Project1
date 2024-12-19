@@ -1,16 +1,17 @@
 import React, { useContext } from 'react';
+import { AuthContext, AuthContextType } from '../../../App'; // Adjust the import path
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../../App';
 
 const Header: React.FC = () => {
   const authContext = useContext(AuthContext);
-  const navigate = useNavigate();
 
   if (!authContext) {
     return <div>Error: AuthContext not found.</div>;
   }
 
   const { username, role, setUsername, setRole } = authContext;
+
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     setUsername('');
@@ -31,15 +32,15 @@ const Header: React.FC = () => {
           </Link>
         </div>
         <div className="d-flex align-items-center">
-          {/* Products Button */}
           <Link to="/products" className="btn btn-light text-dark fw-bold me-3">
             Products
           </Link>
           {username ? (
             <>
-              <span className="text-white me-3">
-                Welcome, {username} ({role})
+              <span className="text-white me-3" style={{ fontFamily: 'Roboto, sans-serif', fontWeight: 'bold', fontSize: '1.1rem' }}>
+                Welcome, <span className="text-warning">{username}</span> (<span className="text-white">{role}</span>)
               </span>
+
               <button
                 onClick={handleLogout}
                 className="btn btn-warning text-dark fw-bold me-3"

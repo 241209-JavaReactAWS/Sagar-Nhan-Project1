@@ -1,7 +1,6 @@
 import React from 'react';
 import Header from '../components/HomePageComponent/NavBar/Header';
 import Carousel from '../components/HomePageComponent/Carousel';
-import ProductForm from '../components/HomePageComponent/ProductForm';
 
 // Sample products for New Arrivals
 const newArrivals = [
@@ -67,13 +66,18 @@ const HomePage: React.FC = () => (
           ))}
         </div>
       </section>
-
-      {/* Add Product Form Section */}
-      <section className="mt-5">
-        <h2 className="text-center">Add a New Product</h2>
-        <ProductForm />
-      </section>
     </main>
+
+    {/* Footer Section */}
+    <footer className="bg-dark text-white text-center py-3 mt-5">
+      <p>&copy; 2024 Diecast Toys Shop. All Rights Reserved.</p>
+      <p>
+        Follow us on: 
+        <a href="#" className="text-warning ms-2">Facebook</a> | 
+        <a href="#" className="text-warning ms-2">Instagram</a> | 
+        <a href="#" className="text-warning ms-2">Twitter</a>
+      </p>
+    </footer>
   </>
 );
 

@@ -1,28 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../App'; // Adjust the import path if needed
 
 const LoginPage: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [usernameInput, setUsernameInput] = useState('');
+  const [passwordHash, setPasswordHash] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const authContext = useContext(AuthContext);
+
+  if (!authContext) {
+    console.error('AuthContext is null');
+    return null;
+  }
+
+  const { setUsername, setRole } = authContext;
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8080/login', {
+      const response = await fetch('http://localhost:8080/account/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username: usernameInput, passwordHash }),
       });
 
       if (response.ok) {
         const data = await response.json();
-        console.log('Logged in user:', data); // Log the logged-in user details
 
-        // Example: Redirect based on role
-        if (data.role === 'ADMIN') {
+        // Extract username and role from response object
+        const { username, roleName } = data;
+        setUsername(username);
+        setRole(roleName.roleName); // roleName.roleName contains the string like "ADMIN"
+
+        // Navigate based on role
+        if (roleName.roleName === 'ADMIN') {
           navigate('/admin-dashboard');
         } else {
           navigate('/');
@@ -49,8 +62,8 @@ const LoginPage: React.FC = () => {
             id="username"
             className="form-control"
             placeholder="Enter your username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={usernameInput}
+            onChange={(e) => setUsernameInput(e.target.value)}
             required
           />
         </div>
@@ -61,8 +74,8 @@ const LoginPage: React.FC = () => {
             id="password"
             className="form-control"
             placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={passwordHash}
+            onChange={(e) => setPasswordHash(e.target.value)}
             required
           />
         </div>
