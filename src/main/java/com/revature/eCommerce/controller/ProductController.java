@@ -29,13 +29,14 @@ public class ProductController {
     /*** UPDATE A PRODUCT ***/
     @PutMapping("/{productId}")
     public ResponseEntity<Product> updateProduct(HttpSession session, @PathVariable Long productId, @RequestBody Product product) {
-        Account user = (Account) session.getAttribute("user");
+        Account user = (Account) session.getAttribute("username");
         if (user == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        if (!"ROLE_ADMIN".equals(user.getRoleName().getRoleName())) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        Object roleObj = session.getAttribute("role");
+        if (roleObj == null || !"ROLE_ADMIN".equals(roleObj.toString())) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build(); // 403 Forbidden
         }
 
         Product updatedProduct = productService.updateProductById(productId, product);
@@ -48,9 +49,11 @@ public class ProductController {
         if(session.isNew()|| session.getAttribute("username") == null){
             return ResponseEntity.status(401).build();
         }
-        if(session.getAttribute("role").equals("ROLE_ADMIN")){
-            return ResponseEntity.status(403).build();
+        Object roleObj = session.getAttribute("role");
+        if (roleObj == null || !"ROLE_ADMIN".equals(roleObj.toString())) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build(); // 403 Forbidden
         }
+
         Product newProduct = productService.addProduct(product);
         if(newProduct == null){
             return ResponseEntity.status(400).build();
@@ -60,13 +63,13 @@ public class ProductController {
 
     @DeleteMapping("/{productId}")
     public ResponseEntity<Void> deleteProduct(HttpSession session, @PathVariable Long productId) {
-        Account user = (Account) session.getAttribute("user");
+        Account user = (Account) session.getAttribute("username");
         if (user == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-
-        if (!"ROLE_ADMIN".equals(user.getRoleName().getRoleName())) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        Object roleObj = session.getAttribute("role");
+        if (roleObj == null || !"ROLE_ADMIN".equals(roleObj.toString())) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build(); // 403 Forbidden
         }
 
         productService.deletedProduct(productId);

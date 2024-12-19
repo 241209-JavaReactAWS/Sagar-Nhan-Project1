@@ -6,10 +6,7 @@ import com.revature.eCommerce.resposity.OrderRepository;
 import com.revature.eCommerce.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,14 +20,16 @@ public class OrderController {
 
 
     /// GET ALL ORDER BY USER ID
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Orders>> getAllOrdersByUserId(@PathVariable  Integer userId){
-         List<Orders> orders =orderService.getAllOrdersFromUserId(userId);
-         if (orders.isEmpty()){
-             return ResponseEntity.noContent().build();
-         }
-         return ResponseEntity.ok(orders);
-     }
+    @PostMapping("/checkout/{userId}")
+    public ResponseEntity<String> checkout(@PathVariable Integer userId) {
+        boolean success = orderService.checkout(userId);
+
+        if (success) {
+            return ResponseEntity.ok("Order placed successfully!");
+        } else {
+            return ResponseEntity.badRequest().body("Failed to process the order. Cart is empty or user not found.");
+        }
+    }
     ///  GET ORDER DETAIL  BY ORDER ID
     @GetMapping("/{orderId}")
     public ResponseEntity<Orders> getOrderDetailByOrderId (@PathVariable  Integer orderId){

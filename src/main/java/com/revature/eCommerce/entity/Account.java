@@ -28,6 +28,8 @@ public class Account implements Serializable {
     private Role role;
 
 
+    public Account() {
+    }
 
     public Account(String username, String passwordHash) {
         this.username = username;

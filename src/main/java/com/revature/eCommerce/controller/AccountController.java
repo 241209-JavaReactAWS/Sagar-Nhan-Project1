@@ -17,7 +17,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/account")
-
 public class AccountController {
 
     @Autowired
@@ -25,6 +24,8 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
+
+    /************* GET ALL ACCOUNT ************/
     @GetMapping("/all")
     public ResponseEntity<?> getAllAccounts(HttpSession session) {
         // Check if user is logged in
@@ -74,8 +75,8 @@ public class AccountController {
         }
 
         // Store user details in session
-        session.setAttribute("user", authenticatedAccount);
-
+        session.setAttribute("username", authenticatedAccount);
+        session.setAttribute("role", authenticatedAccount.getRoleName().getRoleName());
         return ResponseEntity.ok("Login successful. Welcome, " + authenticatedAccount.getUsername());
     }
     /************LOG OUT ACCOUNT************/

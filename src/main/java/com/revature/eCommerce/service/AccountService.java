@@ -6,8 +6,7 @@ import com.revature.eCommerce.resposity.AccountRepository;
 import com.revature.eCommerce.resposity.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +20,6 @@ public class AccountService {
     @Autowired
     private RoleRepository roleRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     /***SET ROLE FOR THE ACCOUNT***/
 
@@ -52,8 +49,6 @@ public class AccountService {
             throw new RuntimeException("Username already exists: " + account.getUsername());
         }
 
-        // Encode the password
-        account.setPasswordHash(passwordEncoder.encode(account.getPasswordHash()));
 
         String effectiveRoleName = (roleName == null || roleName.isEmpty()) ? "ROLE_USER" : roleName;
         // Assign role to the account
@@ -69,14 +64,20 @@ public class AccountService {
     }
 
     /****LOGIN ACCOUNT **/
-    public Account loginAccount(String username, String rawPassword) {
+    public Account loginAccount(String username, String passwordHash) {
         Account account = accountRepository.findByUsername(username);
-        if (account != null && passwordEncoder.matches(rawPassword, account.getPasswordHash())) {
+        if (account != null && account.getPasswordHash().equals(passwordHash)) {
             return account;
         }
-        return null;
+        else
+
+        {
+            throw new RuntimeException("Invalid username or password");
+        }
     }
-    /***LOGOUT ACCOUNTS***/
+
+
+
 
     /***GET ALL ACCOUNTS***/
     public List<Account> getAllAccounts(){return accountRepository.findAll();}
