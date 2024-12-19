@@ -68,16 +68,17 @@ public class AccountController {
     /************LOGIN ACCOUNT************/
     @PostMapping("/login")
     public ResponseEntity<?> loginAccount(@RequestBody Account account, HttpSession session) {
-        // Authenticate the user
+
         Account authenticatedAccount = accountService.loginAccount(account.getUsername(), account.getPasswordHash());
         if (authenticatedAccount == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
 
-        // Store user details in session
-        session.setAttribute("username", authenticatedAccount);
-        session.setAttribute("role", authenticatedAccount.getRoleName().getRoleName());
-        return ResponseEntity.ok("Login successful. Welcome, " + authenticatedAccount.getUsername());
+
+        session.setAttribute("username", authenticatedAccount.getUsername());
+        session.setAttribute("userId", authenticatedAccount.getUserId());
+        session.setAttribute("role", authenticatedAccount.getRoleName());
+        return ResponseEntity.ok(authenticatedAccount);
     }
     /************LOG OUT ACCOUNT************/
     @PostMapping("/logout")

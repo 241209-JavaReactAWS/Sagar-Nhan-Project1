@@ -45,14 +45,14 @@ public class AccountService {
     /***REGISTER NEW ACCOUNT***/
     public Account registerAccount(Account account, String roleName) {
         // Check if the username already exists
+
         if (accountRepository.findByUsername(account.getUsername()) != null) {
             throw new RuntimeException("Username already exists: " + account.getUsername());
         }
 
-
-        String effectiveRoleName = (roleName == null || roleName.isEmpty()) ? "ROLE_USER" : roleName;
+        String effectiveRoleName = (roleName == null || roleName.isEmpty()) ? "USER" : roleName;
         // Assign role to the account
-        Role role = roleRepository.findByRoleName(roleName);
+        Role role = roleRepository.findByRoleName(effectiveRoleName);
         if (role != null) {
             account.setRoleName(role);
         } else {

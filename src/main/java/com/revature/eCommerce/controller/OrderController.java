@@ -20,16 +20,16 @@ public class OrderController {
 
 
     /// GET ALL ORDER BY USER ID
-    @PostMapping("/checkout/{userId}")
-    public ResponseEntity<String> checkout(@PathVariable Integer userId) {
-        boolean success = orderService.checkout(userId);
-
-        if (success) {
-            return ResponseEntity.ok("Order placed successfully!");
-        } else {
-            return ResponseEntity.badRequest().body("Failed to process the order. Cart is empty or user not found.");
-        }
-    }
+//    @PostMapping("/checkout/{userId}")
+//    public ResponseEntity<String> checkout(@PathVariable Integer userId) {
+//        boolean success = orderService.checkout(userId);
+//
+//        if (success) {
+//            return ResponseEntity.ok("Order placed successfully!");
+//        } else {
+//            return ResponseEntity.badRequest().body("Failed to process the order. Cart is empty or user not found.");
+//        }
+//    }
     ///  GET ORDER DETAIL  BY ORDER ID
     @GetMapping("/{orderId}")
     public ResponseEntity<Orders> getOrderDetailByOrderId (@PathVariable  Integer orderId){
