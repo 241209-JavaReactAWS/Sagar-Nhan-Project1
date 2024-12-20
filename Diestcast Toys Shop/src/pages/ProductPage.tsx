@@ -1,17 +1,42 @@
-// src/containers/ProductPage.tsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ProductCard from '../components/product/ProductCard';
-import { Product as ProductType} from '../types/productTypes';
+import { Product } from '../types/productTypes'; // Import updated interface
+import { fetchAllProducts } from '../components/product/productApi';
 
-interface ProductPageProps {
-  products: ProductType[];
-}
+const ProductPage: React.FC = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
+  // Fetch products when the component mounts
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const productsData = await fetchAllProducts();
+        console.log(productsData); // Log products for debugging
+        setProducts(productsData);
+      } catch (err) {
+        setError('Failed to load products. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, []);
+
+  if (loading) {
+    return <p>Loading products...</p>;
+  }
+
+  if (error) {
+    return <p className="text-danger">{error}</p>;
+  }
+
   return (
     <div className="product-container mt-5">
       {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
+        <ProductCard key={product.productId} product={product} />
       ))}
     </div>
   );
