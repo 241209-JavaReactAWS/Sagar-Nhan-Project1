@@ -25,7 +25,8 @@ public class Product {
     @ManyToMany(mappedBy = "products")
     private List<ShoppingCart> carts;
 
-    private String imageUrl;
+    @Lob
+    private byte[] imageData;
 
     public long getProductId() {
         return productId;
@@ -57,12 +58,19 @@ public class Product {
         this.availableQuantity = availableQuantity;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public byte[] getImageData() {
+        return imageData;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageData(byte[] imageData) {
+        this.imageData = imageData;
     }
 
+    public List<ShoppingCart> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(List<ShoppingCart> carts) {
+        this.carts = carts;
+    }
 }
