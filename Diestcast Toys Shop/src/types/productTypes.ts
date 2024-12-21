@@ -1,7 +1,8 @@
-export interface Product{
-    id: number;
-    name: string;
-    description: string;
+export interface Product {
+    productId: number; // Matches the backend property
+    productName: string; // Matches the backend property
     price: number;
-    quantity: number;
-}
+    availableQuantity: number;
+    imageUrl: string | null; // Handles the `null` case
+  }
+  

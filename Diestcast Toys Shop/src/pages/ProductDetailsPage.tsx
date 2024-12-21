@@ -14,7 +14,7 @@ const ProductDetailsPage: React.FC<ProductDetailsPageProps> = ({ products }) => 
 
   useEffect(() => {
     if (productId) {
-      const foundProduct = products.find(p => p.id === parseInt(productId));
+      const foundProduct = products.find(p => p.productId === parseInt(productId));
       setProduct(foundProduct || null);
     }
   }, [productId, products]);
