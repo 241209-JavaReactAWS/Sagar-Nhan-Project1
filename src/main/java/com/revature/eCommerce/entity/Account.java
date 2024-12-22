@@ -36,6 +36,9 @@ public class Account implements Serializable {
         this.passwordHash = passwordHash;
     }
 
+    public Account(Integer userId) {
+    }
+
 
     public Integer getUserId() {
         return userId;

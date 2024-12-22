@@ -2,6 +2,7 @@ package com.revature.eCommerce.entity;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -11,13 +12,13 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
-    private long productId;
+    private Long productId;
 
     @Column(name = "product_name", nullable = false)
     private String productName;
 
     @Column(name = "price", nullable = false)
-    private Double price;
+    private BigDecimal price;
 
     @Column(name = "available_quantity", nullable = false)
     private Integer availableQuantity ;
@@ -25,14 +26,24 @@ public class Product {
     @ManyToMany(mappedBy = "products")
     private List<ShoppingCart> carts;
 
-    @Lob
-    private byte[] imageData;
+    @Column(name = "image_path")
+    private String imagePath; // New field for file system storage
 
-    public long getProductId() {
+    public Product() {
+    }
+    public Product(long productId, String productName, BigDecimal price, Integer availableQuantity, String imagePath) {
+        this.productId = productId;
+        this.productName = productName;
+        this.price = price;
+        this.availableQuantity = availableQuantity;
+        this.imagePath = imagePath;
+    }
+
+    public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(long productId){
+    public void setProductId(Long productId){
         this.productId =productId;
     }
 
@@ -43,10 +54,10 @@ public class Product {
         this.productName = productName;
     }
 
-    public Double getPrice () {
+    public BigDecimal getPrice () {
         return price;
     }
-    public void setPrice (Double price) {
+    public void setPrice (BigDecimal price) {
         this.price = price;
     }
 
@@ -58,12 +69,11 @@ public class Product {
         this.availableQuantity = availableQuantity;
     }
 
-    public byte[] getImageData() {
-        return imageData;
+    public String getImagePath() {
+        return imagePath;
     }
-
-    public void setImageData(byte[] imageData) {
-        this.imageData = imageData;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public List<ShoppingCart> getCarts() {

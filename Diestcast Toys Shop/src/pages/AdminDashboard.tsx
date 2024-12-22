@@ -19,7 +19,6 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ products }) => {
             <tr>
               <th>ID</th>
               <th>Name</th>
-              <th>Description</th>
               <th>Price</th>
               <th>Quantity</th>
             </tr>
@@ -29,7 +28,6 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ products }) => {
               <tr key={product.id}>
                 <td>{product.id}</td>
                 <td>{product.name}</td>
-                <td>{product.description}</td>
                 <td>${product.price.toFixed(2)}</td>
                 <td>{product.quantity}</td>
               </tr>

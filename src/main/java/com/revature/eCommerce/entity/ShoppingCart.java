@@ -1,5 +1,6 @@
 package com.revature.eCommerce.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
@@ -9,36 +10,35 @@ import java.util.List;
 public class ShoppingCart {
 
     @Id
-    @Column(name = "user_id")
-    private Integer userId; // Primary Key, linked to Account
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cart_id")
+    private Long cartId; // Primary key
 
     @OneToOne
-    @MapsId // Maps the primary key to the Account entity
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_id", unique = true)
     private Account user;
 
     @Column(name = "total_amount", nullable = false)
     private BigDecimal totalAmount = BigDecimal.ZERO;
 
     @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CartItems> cartItems;
-
+    @JsonManagedReference // Prevent circular references during serialization
+    private List<CartItem> cartItems;
 
     @ManyToMany
     @JoinTable(
-            name = "shopping_cart_items",
+            name = "shopping_cart_products",
             joinColumns = @JoinColumn(name = "cart_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private List<Product> products;
-
     // Getters and Setters
-    public Integer getUserId() {
-        return userId;
+    public Long getCartId() {
+        return cartId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setCartId(Long cartId) {
+        this.cartId = cartId;
     }
 
     public Account getUser() {
@@ -57,19 +57,11 @@ public class ShoppingCart {
         this.totalAmount = totalAmount;
     }
 
-    public List<CartItems> getCartItems() {
+    public List<CartItem> getCartItems() {
         return cartItems;
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
-    public void setCartItems(List<CartItems> cartItems) {
+    public void setCartItems(List<CartItem> cartItems) {
         this.cartItems = cartItems;
     }
 }

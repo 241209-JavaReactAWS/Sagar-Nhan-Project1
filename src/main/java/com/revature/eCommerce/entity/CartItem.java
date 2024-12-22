@@ -1,11 +1,14 @@
 package com.revature.eCommerce.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+
 @Entity
-@Table(name="shopping_cart_items")
-public class CartItems {
+@Table(name = "shopping_cart_items")
+public class CartItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,19 +16,21 @@ public class CartItems {
     private Long cartItemId;
 
     @ManyToOne
-    @JoinColumn(name = "cart_id", referencedColumnName = "user_id", nullable = false)
+    @JoinColumn(name = "cart_id", nullable = false)
+    @JsonBackReference
     private ShoppingCart shoppingCart;
 
     @ManyToOne
-    @JoinColumn(name = "product_id", referencedColumnName = "product_id", nullable = false)
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
+    @Column(name = "price", nullable = false)
+    private BigDecimal price;
+
     // Getters and Setters
-
-
     public Long getCartItemId() {
         return cartItemId;
     }
@@ -58,4 +63,13 @@ public class CartItems {
         this.quantity = quantity;
     }
 
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 }
+
+

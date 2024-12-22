@@ -6,6 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Service
@@ -14,29 +19,46 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    /**GET ALL PROdUCTS **/
+    private final String uploadDir = System.getProperty("user.dir") + "/imageProducts/";
+
+    /**GET ALL PRODUCTS **/
     public List<Product> getAllProducts() {
-        return productRepository.findAll();
+        List<Product> products = productRepository.findAll();
+        return products.stream().map(product -> new Product(
+                product.getProductId(),
+                product.getProductName(),
+                product.getPrice(),
+                product.getAvailableQuantity(),
+                product.getImagePath()
+        )).toList();
     }
+
     /**GET PROdUCT BY ID **/
     public Product getProductById(Long productId){
-        return productRepository.findById(productId).orElse(null);
+        Product product = productRepository.findById(productId).orElseThrow(null);
+        return new Product(
+                product.getProductId(),
+                product.getProductName(),
+                product.getPrice(),
+                product.getAvailableQuantity(),
+                product.getImagePath()
+        );
     }
+
     /**ADD NEW PROdUCT BY **/
-    public void AddNewProduct(String productName, Double price, Integer availableQuantity, MultipartFile image) {
+    public Product addNewProduct(String productName, BigDecimal price, Integer availableQuantity, MultipartFile image) {
         try {
-            // Create a new product
+            // Save the image and get the relative path
+            String imagePath = saveImageToFileSystem(image);
+
+            // Create and save the product
             Product product = new Product();
             product.setProductName(productName);
             product.setPrice(price);
             product.setAvailableQuantity(availableQuantity);
-
-            // Set image data
-            product.setImageData(image.getBytes());
-
-            // Save the product
-            productRepository.save(product);
-        } catch (Exception e) {
+            product.setImagePath(imagePath); // Save the relative path
+            return productRepository.save(product);
+        } catch (IOException e) {
             throw new RuntimeException("Error saving product with image", e);
         }
     }
@@ -45,32 +67,41 @@ public class ProductService {
         productRepository.deleteById(productId);
     }
     /***********  UPDATE PRODUCT BY ID      **********/
-    public Product updateProductById(Long productId, Product updatedProduct) {
+    /** UPDATE PRODUCT BY ID **/
+    public Product updateProductById(Long productId, Product updatedProduct, MultipartFile image) {
         return productRepository.findById(productId).map(product -> {
-            product.setProductName(updatedProduct.getProductName());
-            product.setPrice(updatedProduct.getPrice());
-            product.setAvailableQuantity(updatedProduct.getAvailableQuantity());
-            product.setImageData(updatedProduct.getImageData()); // Adjusted for imageData
-            return productRepository.save(product);
+            try {
+                product.setProductName(updatedProduct.getProductName());
+                product.setPrice(updatedProduct.getPrice());
+                product.setAvailableQuantity(updatedProduct.getAvailableQuantity());
+
+                if (image != null && !image.isEmpty()) {
+                    // Save new image and update the imagePath
+                    String imagePath = saveImageToFileSystem(image);
+                    product.setImagePath(imagePath);
+                }
+                return productRepository.save(product);
+            } catch (IOException e) {
+                throw new RuntimeException("Error updating product image", e);
+            }
         }).orElseThrow(() -> new RuntimeException("Product not found"));
     }
-    /***********  UPLOAD PRODUCT IMAGE      **********/
-    public String uploadProductImage(Long productId, MultipartFile file) {
-        Product product = productRepository.findById(productId).orElseThrow(() ->
-                new RuntimeException("Product not found"));
-        try {
-            product.setImageData(file.getBytes());
-            productRepository.save(product);
-            return "Image uploaded successfully";
-        } catch (Exception e) {
-            throw new RuntimeException("Error uploading image", e);
+
+    /** SAVE IMAGE TO FILE SYSTEM **/
+    private String saveImageToFileSystem(MultipartFile image) throws IOException {
+        // Ensure the upload directory exists
+        Path uploadPath = Paths.get(uploadDir);
+        if (!Files.exists(uploadPath)) {
+            Files.createDirectories(uploadPath);
         }
-    }
-    /********* GET IMAGE FOR PRODCUT   *********/
-    public byte[] getProductImage(Long productId) {
-        Product product = productRepository.findById(productId).orElseThrow(() ->
-                new RuntimeException("Product not found"));
-        return product.getImageData();
+
+        // Save the file with a unique name to prevent overwrites
+        String fileName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
+        Path filePath = uploadPath.resolve(fileName);
+        Files.write(filePath, image.getBytes());
+
+        // Return only the filename
+        return fileName;
     }
 
 }

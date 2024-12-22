@@ -1,7 +1,10 @@
+import "../components/product/product.css";
+
 import React, { useEffect, useState } from 'react';
 import ProductCard from '../components/product/ProductCard';
 import { Product } from '../types/productTypes'; // Import updated interface
 import { fetchAllProducts } from '../components/product/productApi';
+
 
 const ProductPage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -34,10 +37,13 @@ const ProductPage: React.FC = () => {
   }
 
   return (
-    <div className="product-container mt-5">
-      {products.map((product) => (
-        <ProductCard key={product.productId} product={product} />
-      ))}
+    <div>
+      <h1>Products</h1>
+      <div className="product-container">
+        {products.map((product) => (
+          <ProductCard key={product.productId} product={product} />
+        ))}
+      </div>
     </div>
   );
 };

@@ -1,27 +1,48 @@
-// src/pages/ProductDetailsPage.tsx
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import Product from '../components/product/Product';
-import { Product as ProductType } from '../types/productTypes';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { fetchProductByProductId } from "../components/product/productApi";
+import { Product } from "../types/productTypes";
 
-interface ProductDetailsPageProps {
-  products: ProductType[];
-}
-
-const ProductDetailsPage: React.FC<ProductDetailsPageProps> = ({ products }) => {
-  const { productId } = useParams();
-  const [product, setProduct] = useState<ProductType | null>(null);
+const ProductDetailsPage: React.FC = () => {
+  const { productId } = useParams<{ productId: string }>();
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (productId) {
-      const foundProduct = products.find(p => p.productId === parseInt(productId));
-      setProduct(foundProduct || null);
+      fetchProductByProductId(parseInt(productId))
+        .then((data) => {
+          setProduct(data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error("Error fetching product:", err);
+          setError("Failed to load product details");
+          setLoading(false);
+        });
     }
-  }, [productId, products]);
+  }, [productId]);
+
+  if (loading) {
+    return <p>Loading product details...</p>;
+  }
+
+  if (error || !product) {
+    return <p>{error || "Product not found!"}</p>;
+  }
 
   return (
-    <div className="product-details-page">
-      {product ? <Product product={product} /> : <p>Loading...</p>}
+    <div>
+      <h1>{product.productName}</h1>
+      <img
+        src={`http://localhost:8080/${product.imagePath}`}
+        alt={product.productName}
+        style={{ width: "300px", height: "300px" }}
+      />
+      
+      <p>Price: ${product.price.toFixed(2)}</p>
+      <p>Quantity: {product.availableQuantity}</p>
     </div>
   );
 };
