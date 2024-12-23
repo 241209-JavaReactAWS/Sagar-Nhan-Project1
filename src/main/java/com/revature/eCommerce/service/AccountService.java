@@ -76,7 +76,10 @@ public class AccountService {
         }
     }
 
-
+    /**** FIND ACCOUNT BY USERNAME **/
+    public Account findAccountByUsername(String username) {
+        return accountRepository.findByUsername(username);
+    }
 
 
     /***GET ALL ACCOUNTS***/

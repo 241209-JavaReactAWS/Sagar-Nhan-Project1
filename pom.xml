@@ -45,7 +45,12 @@
 			<version>24.0.1</version>
 			<scope>compile</scope>
 		</dependency>
-
+		<!--- Serialization library -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.18.1</version>
+		</dependency>
 		<!-- Spring Boot Starter AOP -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -1,5 +1,7 @@
 package com.revature.eCommerce.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -7,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name ="products")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Product {
 
     @Id
@@ -24,6 +27,7 @@ public class Product {
     private Integer availableQuantity ;
 
     @ManyToMany(mappedBy = "products")
+    @JsonIgnore
     private List<ShoppingCart> carts;
 
     @Column(name = "image_path")

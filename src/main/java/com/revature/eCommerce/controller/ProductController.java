@@ -2,7 +2,9 @@ package com.revature.eCommerce.controller;
 import com.revature.eCommerce.entity.Account;
 import com.revature.eCommerce.entity.Product;
 import com.revature.eCommerce.entity.Role;
+import com.revature.eCommerce.resposity.AccountRepository;
 import com.revature.eCommerce.resposity.ProductRepository;
+import com.revature.eCommerce.service.AccountService;
 import com.revature.eCommerce.service.ProductService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ public class ProductController {
     public ProductService productService;
     @Autowired
     public ProductRepository productRepository;
+    @Autowired
+    private AccountService accountService;
 
     /*** GET ALL PRODUCT ***/
     @GetMapping
@@ -47,20 +51,27 @@ public class ProductController {
     (
             HttpSession session,
             @PathVariable Long productId,
-            @RequestBody Product product,
-            @RequestPart(value="images", required = false) MultipartFile image
+            @RequestBody Product product
+
     ) {
-        Account user = (Account) session.getAttribute("username");
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+// Fetch the Account object from the database
+        Account user = accountService.findAccountByUsername(username);
         if (user == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        Object roleObj = session.getAttribute("role");
-        if (roleObj == null || !"ADMIN".equals(roleObj.toString())) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build(); // 403 Forbidden
+// Check if the user is an admin
+        if (!"ADMIN".equals(user.getRoleName().getRoleName())) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
-        Product updatedProduct = productService.updateProductById(productId, product, image);
+
+        Product updatedProduct = productService.updateProductById(productId, product);
         return ResponseEntity.ok(updatedProduct);
     }
 
@@ -79,7 +90,7 @@ public class ProductController {
                     .body(null);
         }
     }
-
+    /******* DELETE PRODUCT BY ID ******/
     @DeleteMapping("/{productId}")
     public ResponseEntity<Void> deleteProduct(HttpSession session, @PathVariable Long productId) {
         String username = (String) session.getAttribute("username");

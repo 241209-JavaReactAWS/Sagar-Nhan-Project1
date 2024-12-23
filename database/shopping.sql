@@ -1,6 +1,6 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS order_items, orders, shopping_cart, products, account, users, account_role;
+DROP TABLE IF EXISTS order_items, orders, shopping_cart, shopping_cart_items, guest_session, products, account, users, account_role;
 
 CREATE TABLE account_role (
     role_id SERIAL NOT NULL,
@@ -29,14 +29,30 @@ CREATE TABLE users (
 CREATE TABLE products (
     product_id SERIAL PRIMARY KEY,
     product_name VARCHAR(255) NOT NULL,
-    description TEXT,
     price DECIMAL(10, 2) NOT NULL CHECK (price >= 0),
-    available_quantity INT NOT NULL CHECK (available_quantity >= 0)
+    available_quantity INT NOT NULL CHECK (available_quantity >= 0),
+	image_path VARCHAR(2000)
 );
+
 
 CREATE TABLE shopping_cart (
     cart_id SERIAL PRIMARY KEY,
-    user_id INT UNIQUE NOT NULL REFERENCES account(user_id) ON DELETE CASCADE
+	 user_id INT UNIQUE REFERENCES account(user_id) ON DELETE CASCADE,
+    total_amount DECIMAL(10, 2) NOT NULL DEFAULT 0.00
+);
+
+CREATE TABLE shopping_cart_items (
+    cart_item_id SERIAL PRIMARY KEY,
+    cart_id INT NOT NULL REFERENCES shopping_cart(cart_id) ON DELETE CASCADE,
+    product_id INT NOT NULL REFERENCES products(product_id) ON DELETE CASCADE,
+    quantity INT NOT NULL CHECK (quantity > 0),
+    price DECIMAL(10, 2) NOT NULL CHECK (price >= 0)
+);
+CREATE TABLE guest_session (
+    session_id SERIAL PRIMARY KEY,
+    cart_id INT UNIQUE REFERENCES shopping_cart(cart_id) ON DELETE CASCADE,
+    session_token VARCHAR(255) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE orders (
@@ -69,18 +85,20 @@ INSERT INTO users (user_id, first_name, last_name, address, email, phone) VALUES
 (2, 'Sagar', 'Patel', '123 asdasd', 'user@gmail.com', '123123123'),
 (3, 'Msj', 'Apple', '123223 asd', 'usersss@gmail.com', '09424244422');
 
-INSERT INTO products (product_name, description, price, available_quantity) VALUES
-('Car', 'Koeniggsegg', 1000.00, 9),
-('Truck', 'Ram', 900.00, 8),
-('Van', 'Kia', 800.00, 7),
-('Car2', 'Honda', 700.00, 6),
-('Truck2', 'Ford', 650.00, 5),
-('Van2', 'Toyota', 550.00, 4),
-('Car3', 'Acura', 500.00, 3),
-('Truck3', 'Hyundai', 400.00, 2),
-('Van3', 'Lexus', 300.00, 1);
+INSERT INTO products (product_name, price, available_quantity, image_path) VALUES
+('Car', 1000.00, 9, 'car1.jpg'),
+('Truck', 900.00, 8,'car2.jpg'),
+('Van', 800.00, 7, 'car3.jpg'),
+('Car2', 700.00, 6, 'car4.jpg'),
+('Truck2', 650.00, 5, 'car5.jpg'),
+('Van2', 550.00, 4, 'car6.jpg'),
+('Car3', 500.00, 3, 'car7.jpg'),
+('Truck3', 400.00, 2, 'car8.jpg'),
+('Van3', 300.00, 1, 'car9.jpg');
 
 INSERT INTO shopping_cart (user_id) VALUES (1), (2);
+INSERT INTO shopping_cart_items (cart_id, product_id, quantity, price)
+VALUES (1, 101, 2, 50.00);
 
 INSERT INTO orders (user_id, total_amount, order_status) VALUES
 (1, 850.00, 'completed'), 
@@ -91,3 +109,7 @@ INSERT INTO order_items (order_id, product_id, quantity, price) VALUES
 (1, 1, 1, 1111.00),
 (2, 2, 2, 424.00),
 (3, 3, 1, 555.00);
+SELECT * FROM account
+ SELECT * FROM products
+ ALTER TABLE products
+DROP COLUMN image_url;
