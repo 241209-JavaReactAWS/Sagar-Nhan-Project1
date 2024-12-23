@@ -24,8 +24,8 @@ Visit Spring Initializr.
 Configure the project with the following settings:
 - #Project: Maven
 - #Language: Java
-- #Spring Boot Version: 3.3.6 
-  ##Dependencies:
+- #Spring Boot Version: 3.3.6
+##Dependencies:
 - #Spring Web
 - #Spring Data JPA
 - #PostgresSQL
