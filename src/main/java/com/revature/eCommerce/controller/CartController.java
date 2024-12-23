@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/shopping-cart")
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class CartController {
 
     @Autowired
@@ -36,4 +37,18 @@ public class CartController {
         ShoppingCart updatedCart = cartService.addProductToCart( userId, productId, quantity  );
         return ResponseEntity.ok(updatedCart);
     }
+
+    @DeleteMapping("/removeItem/{productId}")
+    public ResponseEntity<ShoppingCart> deleteItemFromCart(
+            @PathVariable Long productId,
+            @RequestParam Integer userId
+    ) {
+        try {
+            ShoppingCart updatedCart = cartService.deleteItemFromCart(userId, productId);
+            return ResponseEntity.ok(updatedCart);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
 }

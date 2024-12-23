@@ -1,18 +1,23 @@
 import React from 'react';
+import { useCart } from './../HomePageComponent/CartContext';
 
-const CartButton: React.FC = () => (
-    <button
-        id="cart-btn"
-        className="btn btn-warning text-dark position-relative"
-    >
-        <i className="fas fa-shopping-cart"></i>
-        <span
-            id="cart-count"
-            className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-        >
-            0
-        </span>
+const AddToCartButton: React.FC<{ productId: number }> = ({ productId }) => {
+  const { addToCart } = useCart();
+
+  const handleAddToCart = async () => {
+    try {
+      await addToCart(productId, 1); // Add 1 item to the cart
+      alert('Item added to cart!');
+    } catch (error) {
+      console.error('Failed to add item to cart:', error);
+    }
+  };
+
+  return (
+    <button onClick={handleAddToCart} className="btn btn-primary">
+      Add to Cart
     </button>
-);
+  );
+};
 
-export default CartButton;
+export default AddToCartButton;

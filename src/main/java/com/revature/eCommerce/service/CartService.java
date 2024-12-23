@@ -2,6 +2,7 @@ package com.revature.eCommerce.service;
 
 
 import com.revature.eCommerce.entity.*;
+import com.revature.eCommerce.resposity.AccountRepository;
 import com.revature.eCommerce.resposity.CartRepository;
 import com.revature.eCommerce.resposity.ProductRepository;
 import jakarta.transaction.Transactional;
@@ -22,7 +23,8 @@ public class CartService {
 
     @Autowired
     private CartRepository cartRepository;
-
+    @Autowired
+    private AccountRepository accountRepository;
     @Autowired
     private ProductRepository productRepository;
 
@@ -41,14 +43,18 @@ public class CartService {
             throw new IllegalArgumentException("Quantity must be greater than zero");
         }
 
+        // Ensure the user exists in the database
+        Account user = accountRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
+
         // Fetch or create the shopping cart
         ShoppingCart cart = cartRepository.findByUser_userId(userId)
                 .orElseGet(() -> {
                     ShoppingCart newCart = new ShoppingCart();
-                    newCart.setUser(new Account(userId));
+                    newCart.setUser(user); // Set the existing user
                     newCart.setTotalAmount(BigDecimal.ZERO);
-                    newCart.setCartItems(new java.util.ArrayList<>());
-                    return cartRepository.save(newCart);
+                    newCart.setCartItems(new java.util.ArrayList<>()); // Initialize empty list
+                    return cartRepository.save(newCart); // Save the new cart
                 });
 
         // Fetch the product
@@ -77,7 +83,7 @@ public class CartService {
 
         // Recalculate total amount
         BigDecimal totalAmount = cart.getCartItems().stream()
-                .map(item -> item.getPrice())
+                .map(CartItem::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         cart.setTotalAmount(totalAmount);
@@ -85,5 +91,34 @@ public class CartService {
         // Save and return the updated cart
         return cartRepository.save(cart);
     }
+    /********* DELETE ITEM FROM CART ****/
+    @Transactional
+    public ShoppingCart deleteItemFromCart(Integer userId, Long productId) {
+        // Fetch the shopping cart
+        ShoppingCart cart = cartRepository.findByUser_userId(userId)
+                .orElseThrow(() -> new RuntimeException("Cart not found for user ID: " + userId));
+
+        // Find the cart item to delete
+        Optional<CartItem> itemToDelete = cart.getCartItems().stream()
+                .filter(item -> item.getProduct().getProductId().equals(productId))
+                .findFirst();
+
+        if (itemToDelete.isEmpty()) {
+            throw new RuntimeException("Product not found in the cart");
+        }
+
+        // Remove the item from the cart
+        cart.getCartItems().remove(itemToDelete.get());
+
+        // Recalculate total amount
+        BigDecimal totalAmount = cart.getCartItems().stream()
+                .map(CartItem::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        cart.setTotalAmount(totalAmount);
+
+        // Save and return the updated cart
+        return cartRepository.save(cart);
+    }
+
 }
 

@@ -1,10 +1,10 @@
 import "../components/product/product.css";
 
 import React, { useEffect, useState } from 'react';
-import ProductCard from '../components/product/ProductCard';
+
 import { Product } from '../types/productTypes'; // Import updated interface
 import { fetchAllProducts } from '../components/product/productApi';
-
+import AddToCartButton from '../components/HomePageComponent/CartButton';
 
 const ProductPage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -40,8 +40,20 @@ const ProductPage: React.FC = () => {
     <div>
       <h1>Products</h1>
       <div className="product-container">
-        {products.map((product) => (
-          <ProductCard key={product.productId} product={product} />
+      {products.map((product) => (
+  <div key={product.productId} className="card" style={{ width: '18rem' }}>
+    <img
+      src={`http://localhost:8080/${product.imagePath}`}
+      className="card-img-top"
+      alt={product.productName}
+      style={{ borderRadius: '15px', padding: '5px' }}
+    />
+    <div className="card-body">
+      <h5 className="card-title">{product.productName}</h5>
+      <p className="card-text">${product.price.toFixed(2)}</p>
+      <AddToCartButton productId={product.productId} />
+    </div>
+  </div>
         ))}
       </div>
     </div>

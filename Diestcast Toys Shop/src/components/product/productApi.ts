@@ -31,12 +31,52 @@ export const addNewProduct = async (productData:{
   formData.append("availableQuantity", String(productData.availableQuantity));
   formData.append("image", productData.imagePath);
 
- 
-
-  
-
   const response = await axios.post(`${API_BASE_URL}/create`,formData,{
     headers: {"Content-Type": "multipart/form-data"}
   });
   return response.data;
 }
+
+// Add a new method to update a product
+
+export const updateProduct = async (
+  productId: number,
+  productData: {
+    productName: string;
+    price: number;
+    availableQuantity: number;
+    imagePath?: File;
+  }
+) => {
+  const formData = new FormData();
+  formData.append('productName', productData.productName);
+  formData.append('price', String(productData.price));
+  formData.append('availableQuantity', String(productData.availableQuantity));
+  if (productData.imagePath) {
+    formData.append('image', productData.imagePath);
+  }
+
+  try {
+    const response = await axios.put(`${API_BASE_URL}/${productId}`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error: any) {
+    console.error('Error updating product:', error);
+    throw error;
+  }
+};
+//DELETE PRODUCT API
+export const deleteProduct = async (productId: number) => {
+  try {
+    const response = await axios.delete(`${API_BASE_URL}/${productId}`, {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true, // Include cookies if required
+    });
+    return response.data;
+  } catch (error: any) {
+    console.error('Error deleting product:', error);
+    throw error;
+  }
+};

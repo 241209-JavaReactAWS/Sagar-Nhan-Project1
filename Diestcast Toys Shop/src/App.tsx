@@ -8,6 +8,7 @@ import RegisterPage from './pages/RegisterPage';
 import Header from './components/HomePageComponent/NavBar/Header';
 import HomePage from './pages/HomePage';
 import AdminPage from './pages/AdminPage'; // Import AdminDashboard component
+import { CartProvider } from './components/HomePageComponent/CartContext';
 import { Product as ProductType } from './types/productTypes';
 
 // Define the AuthContext type
@@ -31,9 +32,10 @@ const App: React.FC = () => {
   return (
     // Provide the AuthContext
     <AuthContext.Provider value={{ username, setUsername, role, setRole }}>
+
+      <CartProvider>
       <Router>
         <Header />
-
         <div className="container mt-1 pt-1">
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -46,7 +48,9 @@ const App: React.FC = () => {
           </Routes>
         </div>
       </Router>
-    </AuthContext.Provider>
+    </CartProvider>
+
+             </AuthContext.Provider>
   );
 };
 
