@@ -25,7 +25,7 @@ Configure the project with the following settings:
 - #Project: Maven
 - #Language: Java
 - #Spring Boot Version: 3.3.6
-##Dependencies:
+## Dependencies:
 - #Spring Web
 - #Spring Data JPA
 - #PostgresSQL
