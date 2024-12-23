@@ -34,7 +34,7 @@ Configure the project with the following settings:
 - Create a PostgreSQL database 
 - Update the **src/main/resources/application.properties** file with your database credentials: 
 ```
- spring.datasource.url=jdbc:postgresql://localhost:5432/diecast_toyshop
+spring.datasource.url=jdbc:postgresql://localhost:5432/ecommerce_db
 spring.datasource.username=your_db_username
 spring.datasource.password=your_db_password
 spring.jpa.hibernate.ddl-auto=update
